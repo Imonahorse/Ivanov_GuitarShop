@@ -1,7 +1,10 @@
 import React from 'react';
+import Catalog from '../pages/catalog';
 
 function App() {
-  return <p>Hello, world</p>;
+  return (
+    <Catalog />
+  );
 }
 
 export default App;

@@ -1,0 +1,106 @@
+.header {
+  position: relative;
+  padding: 18px 0;
+
+  background-color: var(--gray);
+
+  :global(.container) {
+    padding-right: 55px;
+  }
+
+  &:after {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    bottom: -97px;
+    width: 100%;
+    height: 74px;
+
+    background-image: url('./header-strings-back.png');
+    background-repeat: repeat-x;
+  }
+}
+
+.nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 72%;
+    left: 17%;
+    width: 894px;
+    height: 298px;
+
+    background-image: url('./header-guitar-back.png');
+    background-repeat: no-repeat;
+  }
+}
+
+.logo {
+  width: 12%;
+}
+
+.logo_link {
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.site_menu {
+  display: flex;
+  flex-wrap: wrap;
+  width: 60%;
+
+  font-size: 14px;
+  color: var(--black);
+}
+
+.site_menu__item {
+  margin-right: 40px;
+  padding: 10px 0;
+
+  letter-spacing: 1.1px;
+  line-height: 20px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.user_menu {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 12.5%;
+}
+
+.user_menu__item {
+  margin-right: 35px;
+  padding: 10px 0;
+
+  &:nth-child(3n) {
+    margin-right: 0;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.user_menu__img {
+  display: block;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.link {
+  &:hover {
+    opacity: 0.5;
+  }
+}
