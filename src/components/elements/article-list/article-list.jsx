@@ -5,7 +5,7 @@ import styles from './article-list.module.scss';
 const articles = [
   {
     name: 'Честер Bass',
-    price: 17000,
+    price: 17500,
     rating: 4.5,
     vote: 15,
     img: 'img',

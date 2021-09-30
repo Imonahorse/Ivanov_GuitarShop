@@ -4,13 +4,13 @@
 
   width: 100%;
   height: 100%;
-  padding: 16px 14px 20px 14px;
+  padding: 16px 14px 18px 14px;
 
   border: 1px solid var(--gray);
 }
 
 .image_container {
-  margin: 0 auto;
+  margin: 0 auto 5px auto;
   height: 190px;
   width: 68px;
 }
@@ -32,6 +32,12 @@
   margin-bottom: 6px;
 }
 
+.stars {
+  display: flex;
+  justify-content: space-between;
+  width: 68px;
+}
+
 .info,
 .controls {
   display: flex;
@@ -40,9 +46,8 @@
 }
 
 .info {
-  margin-bottom: 16px;
   flex-grow: 1;
-  flex-wrap: wrap;
+  margin-bottom: 4px;
 }
 
 .title,
@@ -59,26 +64,28 @@
 .button {
   width: 89px;
   min-height: 23px;
-  padding: 4px 9px;
+  padding: 4px 5px 4px 5px;
 
   font-size: 12px;
   line-height: 15px;
-  letter-spacing: 0.02em;
   color: var(--white);
   background-color: var(--gray-5);
   border: none;
   border-radius: 2px;
   cursor: pointer;
+  letter-spacing: 1px;
 }
 
 .button {
+  width: 87px;
+  padding-left: 22px;
   background: url('./cart.svg') 10px center no-repeat var(--orange);
-  padding-left: 24px;
 }
 
 .rating {
   display: flex;
   align-items: center;
+  margin-bottom: 4px;
 }
 
 .count {

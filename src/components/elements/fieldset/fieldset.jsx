@@ -6,7 +6,7 @@ import Checkbox from '../checkbox/checkbox';
 import PriceInput from '../price-input/price-input';
 
 const Labels = {
-  PRICE: 'Цена',
+  PRICE: 'Цена, ₽',
   TYPE: 'Тип гитар',
   STRINGS: 'Количество струн',
 };

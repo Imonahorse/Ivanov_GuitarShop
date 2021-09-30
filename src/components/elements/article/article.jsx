@@ -28,8 +28,9 @@ function Article({info}) {
         </div>
         <div className={styles.rating}>
           <ReactStars
+            classNames={styles.stars}
             count={5}
-            size={17}
+            size={15}
             isHalf
             edit={false}
             activeColor={YELLOW}
