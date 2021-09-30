@@ -1,0 +1,45 @@
+.intro {
+  padding: 213px 0 25px 0;
+}
+
+.title {
+  margin:0 0 22px 0;
+
+  font-size: 23px;
+  line-height: 26px;
+  font-weight: bold;
+}
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+
+  font-size: 17px;
+  line-height: 19px;
+  color: var(--gray-3);
+}
+
+.item {
+  margin-right: 36px;
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    right: -25px;
+    top: 5px;
+    width: 13px;
+    height: 8px;
+
+    background: url('./arrow.svg') no-repeat;
+  }
+
+  &:last-child {
+    margin-right: 0;
+
+    &:after {
+      content: none;
+    }
+  }
+
+}

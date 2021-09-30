@@ -1,0 +1,46 @@
+.sorting {
+  display: flex;
+  padding: 0 12px 0 22px;
+}
+
+.title {
+  margin: 0 19px 0 0;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item {
+  margin-right: 34px;
+  cursor: pointer;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.additional_list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.addition_item {
+  margin-right: 20px;
+  cursor: pointer;
+
+  width: 14px;
+  height: 11px;
+  background: url('./triangle-button.svg') no-repeat;
+
+  &__reverse {
+    transform: rotate(180deg);
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
