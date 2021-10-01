@@ -6,6 +6,20 @@ import basketIcon from './icon-basket.svg';
 import logo from './logo-header.svg';
 
 const links = ['Каталог', 'Где купить?', 'О компании', 'Сервис-центры'];
+const userMenuIcons = [
+  {
+    description: 'Map',
+    img: mapIcon,
+  },
+  {
+    description: 'Search',
+    img: searchIcon,
+  },
+  {
+    description: 'Basket',
+    img: basketIcon,
+  },
+];
 
 function Header() {
   return (
@@ -27,21 +41,15 @@ function Header() {
             }
           </ul>
           <ul className={styles.user_menu}>
-            <li className={styles.user_menu__item}>
-              <a href='/'>
-                <img className={styles.user_menu__img} src={mapIcon} alt='Map'/>
-              </a>
-            </li>
-            <li className={styles.user_menu__item}>
-              <a href='/'>
-                <img className={styles.user_menu__img} src={searchIcon} alt='Search'/>
-              </a>
-            </li>
-            <li className={styles.user_menu__item}>
-              <a href='/'>
-                <img className={styles.user_menu__img} src={basketIcon} alt='Map'/>
-              </a>
-            </li>
+            {
+              userMenuIcons.map(({description, img}) => (
+                <li className={styles.user_menu__item} key={description}>
+                  <a href=''>
+                    <img className={styles.user_menu__img} src={img} alt={description}/>
+                  </a>
+                </li>
+              ))
+            }
           </ul>
         </nav>
       </div>

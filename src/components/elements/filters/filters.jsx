@@ -3,7 +3,7 @@ import styles from './filters.module.scss';
 import Fieldset from '../fieldset/fieldset';
 
 const Labels = {
-  PRICE: 'Цена',
+  PRICE: 'Цена, ₽',
   TYPE: 'Тип гитар',
   STRINGS: 'Количество струн',
 };
