@@ -1,4 +1,4 @@
-.list {
+.catalog_list {
   display: grid;
   grid-template-rows: auto auto auto;
   grid-template-columns: 1fr 1fr 1fr;
@@ -7,7 +7,16 @@
   padding: 30px 0;
 }
 
-.item {
+.basket_list {
+  display: flex;
+  flex-direction: column;
+}
+
+.catalog_item {
   width: 220px;
   min-height: 304px;
+}
+
+.basket_item {
+  min-height: 164px;
 }

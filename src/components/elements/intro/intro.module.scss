@@ -41,5 +41,14 @@
       content: none;
     }
   }
+}
 
+.link {
+  &:hover {
+    opacity: var(--default-hover-opacity);
+  }
+
+  &:active {
+    opacity: var(--default-active-opacity);
+  }
 }

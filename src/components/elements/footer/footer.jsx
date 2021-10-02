@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './footer.module.scss';
-import logoFooter from './logo-footer.svg';
 import facebookIcon from './facebook.svg';
 import instagramIcon from './instagram.svg';
 import twitterIcon from './twitter.svg';
+import Logo from '../logo/logo';
 
 const catalogLinks = ['Акустические гитары', 'Классические гитары', 'Электрогитары', 'Бас-гитары', 'Укулеле'];
 const infoLinks = ['Где купить?', 'Блог', 'Вопрос - ответ', 'Возврат', 'Сервис-Центры'];
@@ -32,9 +32,7 @@ function Footer() {
       <div className={`${styles.inner} container`}>
         <div className={styles.social}>
           <div className={styles.logo}>
-            <a className={styles.logo_link} href="/">
-              <img src={logoFooter} alt="Логотип сайта"/>
-            </a>
+            <Logo isFooter/>
           </div>
           <ul className={styles.social_list}>
             {

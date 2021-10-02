@@ -7,6 +7,10 @@ import guitarImg3 from './guitar-3.png';
 import guitarImg4 from './guitar-4.png';
 import guitarImg5 from './guitar-5.png';
 import guitarImg6 from './guitar-6.png';
+import {useRouteMatch} from 'react-router-dom';
+import {AppRoutes} from '../../../const';
+import BasketArticle from '../basket-article/basket-article';
+import cn from 'classnames';
 
 const articles = [
   {
@@ -75,14 +79,25 @@ const articles = [
 ];
 
 function ArticleList() {
+  const {path} = useRouteMatch();
+  const listStyle = cn(
+    {[styles.catalog_list]: path === AppRoutes.MAIN},
+    {[styles.basket_list]: path === AppRoutes.BASKET},
+  );
+  const itemStyle = cn(
+    {[styles.catalog_item]: path === AppRoutes.MAIN},
+    {[styles.basket_item]: path === AppRoutes.BASKET},
+  );
+
   return (
     <section>
-      <h2 className='visually-hidden'>Каталог</h2>
-      <ul className={styles.list}>
+      <h2 className="visually-hidden">Карточки товаров</h2>
+      <ul className={listStyle}>
         {
           articles.map((article) => (
-            <li className={styles.item} key={article.name}>
-              <Article info={article}/>
+            <li className={itemStyle} key={article.name}>
+              {path === AppRoutes.MAIN && <Article info={article}/>}
+              {path === AppRoutes.BASKET && <BasketArticle info={article}/>}
             </li>
           ))
         }

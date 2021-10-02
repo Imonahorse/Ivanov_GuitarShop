@@ -46,12 +46,6 @@
   margin-bottom: 53px;
 }
 
-.logo_link {
-  &:hover {
-    opacity: 0.5;
-  }
-}
-
 .social_list {
   display: flex;
   flex-wrap: wrap;
@@ -142,7 +136,11 @@
   padding-left: 23px;
 
   &:hover {
-    opacity: 0.5;
+    opacity: var(--default-hover-opacity);
+  }
+
+  &:active {
+    opacity: var(--default-active-opacity);
   }
 
   &:before {
@@ -178,6 +176,10 @@
 
 .link {
   &:hover {
-    opacity: 0.5;
+    opacity: var(--default-hover-opacity);
+  }
+
+  &:active {
+    opacity: var(--default-active-opacity);
   }
 }

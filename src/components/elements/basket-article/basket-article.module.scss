@@ -1,0 +1,141 @@
+.article {
+  position: relative;
+  display: flex;
+  padding: 20px 0;
+
+  border-top: 0.7px solid var(--gray);
+  border-bottom: 0.7px solid var(--gray);
+}
+
+.close {
+  position: absolute;
+  top: 22px;
+  width: 12px;
+  height: 12px;
+
+  background: url('./close.svg');
+  border: none;
+  cursor: pointer;
+}
+
+.img {
+  display: flex;
+  justify-content: center;
+  width: 156px;
+  height: 124px;
+  padding-right: 27px;
+}
+
+.inner {
+  display: flex;
+  align-items: flex-start;
+  padding-bottom: 52px;
+}
+
+.info {
+  width: 356px;
+  padding-right: 20px;
+}
+
+.title,
+.number,
+.description {
+  margin: 0;
+
+  line-height: 15px;
+  font-size: 14px;
+}
+
+.title {
+  margin-bottom: 14px;
+
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.number {
+  margin-bottom: 6px;
+
+  letter-spacing: 1px;
+}
+
+.description {
+  letter-spacing: 1.3px;
+}
+
+.control {
+  display: flex;
+  width: 82px;
+  height: 30px;
+  align-self: center;
+  margin-bottom: 2px;
+
+  border: 1px solid var(--gray-4);
+}
+
+.button,
+.count {
+  width: 33.3%;
+}
+
+.count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+
+  font-size: 16px;
+  line-height: 15px;
+  letter-spacing: 0.05em;
+  color: var(--gray-4);
+  border-left: 1px solid var(--gray-4);
+  border-right: 1px solid var(--gray-4);
+}
+
+.button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+
+  &_minus {
+    background-image: url('./minus.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 8px 1px;
+  }
+
+  &_plus {
+    background-image: url('./plus.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 8px 8px;
+  }
+}
+
+.price,
+.total {
+  margin: 0;
+
+  font-size: 20px;
+  line-height: 15px;
+  letter-spacing: 0.05em;
+  font-weight: normal;
+}
+
+.price {
+  width: 173px;
+  align-self: flex-end;
+  padding-right: 20px;
+}
+
+.total {
+  width: 173px;
+  align-self: flex-end;
+  padding-left: 20px;
+
+  font-weight: bold;
+  text-align: end;
+}
+
+

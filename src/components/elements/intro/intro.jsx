@@ -7,10 +7,10 @@ function Intro() {
       <h1 className={styles.title}>Каталог гитар</h1>
       <ul className={styles.breadcrumbs}>
         <li className={styles.item}>
-          <a href='/'>Главная</a>
+          <a className={styles.link} href='/'>Главная</a>
         </li>
         <li className={styles.item}>
-          <a href='/'>Каталог</a>
+          <a className={styles.link} href='/'>Каталог</a>
         </li>
       </ul>
     </section>

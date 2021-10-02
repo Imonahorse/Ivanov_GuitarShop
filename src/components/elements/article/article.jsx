@@ -2,10 +2,10 @@ import React from 'react';
 import ReactStars from 'react-rating-stars-component/dist/react-stars';
 import styles from './article.module.scss';
 import PropTypes from 'prop-types';
+import Button from '../button/button';
+import {makePriceString} from '../../../const';
 
 const YELLOW = '#FFD168';
-
-const makePriceString = (value) => value.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1 ').trim();
 
 function Article({info}) {
   const {name, price, rating, vote, img} = info;
@@ -39,8 +39,8 @@ function Article({info}) {
           <p className={styles.count}>{vote}</p>
         </div>
         <div className={styles.controls}>
-          <button className={styles.link} type='button'>Подробнее</button>
-          <button className={styles.button} type='button'>Купить</button>
+          <Button small gray href='/'>Подробнее</Button>
+          <Button small orange type='button'>Купить</Button>
         </div>
       </div>
     </article>

@@ -1,0 +1,11 @@
+.logo {
+  cursor: auto;
+
+  &__link {
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}

@@ -47,3 +47,14 @@
     margin-right: 0;
   }
 }
+
+.item,
+.addition_item {
+  &:hover {
+    opacity: var(--default-hover-opacity);
+  }
+
+  &:active {
+    opacity: var(--default-active-opacity);
+  }
+}

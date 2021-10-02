@@ -1,9 +1,22 @@
 import React from 'react';
-import Catalog from '../pages/catalog';
+import Basket from '../pages/basket/basket';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import Catalog from '../pages/catalog/catalog';
+import {AppRoutes} from '../../const';
+
 
 function App() {
   return (
-    <Catalog />
+    <BrowserRouter>
+      <Switch>
+        <Route exact path={AppRoutes.MAIN}>
+          <Catalog/>
+        </Route>
+        <Route exact path={AppRoutes.BASKET}>
+          <Basket/>
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 

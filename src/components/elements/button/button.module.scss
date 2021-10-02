@@ -1,0 +1,29 @@
+.small {
+  display: flex;
+  justify-content: center;
+  width: 89px;
+  min-height: 23px;
+  padding: 4px 5px 4px 5px;
+
+  font-size: 12px;
+  line-height: 15px;
+  color: var(--white);
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  letter-spacing: 1px;
+
+  &__img {
+    width: 87px;
+    padding-left: 22px;
+    background: url('./cart.svg') 10px center no-repeat var(--orange);
+  }
+}
+
+.gray {
+  background-color: var(--gray-5);
+}
+
+.orange {
+  background-color: var(--orange);
+}

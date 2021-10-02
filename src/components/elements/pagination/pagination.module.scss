@@ -32,5 +32,13 @@
 
   border: 0.7px solid #9F9E9E;
   border-radius: 2px;
+
+  &:hover {
+    opacity: var(--default-hover-opacity);
+  }
+
+  &:active {
+    opacity: var(--default-active-opacity);
+  }
 }
 

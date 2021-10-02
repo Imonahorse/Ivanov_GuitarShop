@@ -46,7 +46,7 @@
 
 .logo_link {
   &:hover {
-    opacity: 0.5;
+    opacity: var(--default-hover-opacity);
   }
 }
 
@@ -93,14 +93,15 @@
 
 .user_menu__img {
   display: block;
-
-  &:hover {
-    opacity: 0.5;
-  }
 }
 
-.link {
+.link,
+.user_menu__img {
   &:hover {
-    opacity: 0.5;
+    opacity: var(--default-hover-opacity);
+  }
+
+  &:active {
+    opacity: var(--default-active-opacity);
   }
 }
