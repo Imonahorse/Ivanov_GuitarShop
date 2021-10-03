@@ -35,3 +35,7 @@
 .input:checked + .span:before {
   background: url('./mark.svg') center no-repeat;
 }
+
+.input:focus + span {
+  outline: 2px solid var(--orange);
+}
