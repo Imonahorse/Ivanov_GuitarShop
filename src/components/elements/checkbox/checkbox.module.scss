@@ -6,7 +6,7 @@
 
 .span {
   position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   padding-left: 40px;
   min-height: 24px;
@@ -37,5 +37,5 @@
 }
 
 .input:focus + span {
-  outline: 2px solid var(--orange);
+  outline-color: 2px solid var(--orange);
 }

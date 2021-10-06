@@ -3,12 +3,13 @@ import Sorting from '../sorting/sorting';
 import ArticleList from '../article-list/article-list';
 import Pagination from '../pagination/pagination';
 import {useSelector} from 'react-redux';
+import {selectFilteredArticles} from '../../../store/selectors';
 
 function Preview() {
-  const articles = useSelector((state) => state.articles);
+  const articles = useSelector(selectFilteredArticles);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [articlesPerPage] = useState(9);
-  const [activeSort, setActiveSort] = useState('по цене');
 
   const lastArticleIndex = currentPage * articlesPerPage;
   const firstArticleIndex = lastArticleIndex - articlesPerPage;

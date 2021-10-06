@@ -27,6 +27,8 @@
 
 .price_list {
   display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .price_item {
@@ -49,6 +51,10 @@
   &:last-child {
     margin-bottom: 0;
   }
+}
+
+.price_item {
+  width: 84px;
 }
 
 .label {
@@ -98,4 +104,23 @@
   border-radius: 2px;
   border: none;
   cursor: pointer;
+}
+
+.price_input {
+  width: 100%;
+  padding: 4px 10px 5px;
+
+  font-size: 15px;
+  line-height: 10px;
+  text-align: center;
+  border: 0.7px solid var(--gray-4);
+  border-radius: 2px;
+
+  &:hover {
+    opacity: var(--default-hover-opacity);
+  }
+
+  &:active {
+    opacity: var(--default-active-opacity);
+  }
 }

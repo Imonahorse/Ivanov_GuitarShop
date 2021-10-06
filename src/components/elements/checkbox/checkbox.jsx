@@ -1,18 +1,31 @@
 import React from 'react';
 import styles from './checkbox.module.scss';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 
-function Checkbox({label}) {
-  return(
+function Checkbox({value, isChecked, disabled, onChange, name}) {
+  return (
     <label className={styles.label}>
-      <input className={`${styles.input} visually-hidden`} type='checkbox'/>
-      <span className={styles.span}>{label}</span>
+      <input
+        className={cn(styles.input, 'visually-hidden')}
+        type="checkbox"
+        name={name}
+        value={value}
+        disabled={disabled}
+        checked={isChecked}
+        onChange={onChange}
+      />
+      <span className={styles.span}>{value}</span>
     </label>
   );
 }
 
 Checkbox.propTypes = {
-  label: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  isChecked: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default Checkbox;

@@ -6,6 +6,8 @@ import basketIcon from './icon-basket.svg';
 import Logo from '../logo/logo';
 import {Link} from 'react-router-dom';
 import {AppRoutes} from '../../../const';
+import {selectBasket} from '../../../store/selectors';
+import {useSelector} from 'react-redux';
 
 const links = ['Каталог', 'Где купить?', 'О компании', 'Сервис-центры'];
 const userMenuIcons = [
@@ -27,6 +29,8 @@ const userMenuIcons = [
 ];
 
 function Header() {
+  const basketCount = useSelector(selectBasket);
+
   return (
     <header className={styles.header}>
       <div className="container">
@@ -50,6 +54,9 @@ function Header() {
                   <Link to={link}>
                     <img className={styles.user_menu__img} src={img} alt={description}/>
                   </Link>
+                  {
+                    description === 'Basket' && <span className={styles.count}>{basketCount.length}</span>
+                  }
                 </li>
               ))
             }

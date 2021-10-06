@@ -20,6 +20,7 @@ function Pagination({articles, articlesPerPage, paginate, currentPage, nextPage,
         }
         <ul className={styles.list}>
           {
+            pageNumbers.length > 1 &&
             pageNumbers.map((page) => (
               <li className={styles.item} key={page}>
                 <a

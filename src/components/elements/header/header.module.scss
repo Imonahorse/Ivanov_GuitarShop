@@ -79,6 +79,7 @@
 }
 
 .user_menu__item {
+  position: relative;
   margin-right: 35px;
   padding: 10px 0;
 
@@ -104,4 +105,13 @@
   &:active {
     opacity: var(--default-active-opacity);
   }
+}
+
+.count {
+  position: absolute;
+  top: 8px;
+  right: -6px;
+  font-size: 10px;
+  line-height: 12px;
+  color: #F20505;
 }

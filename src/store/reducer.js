@@ -2,14 +2,35 @@ import electricGuitar from '../components/elements/article-list/guitar-1.png';
 import ukulele from '../components/elements/article-list/guitar-3.png';
 import acousticGuitar from '../components/elements/article-list/guitar-4.png';
 import {createReducer} from '@reduxjs/toolkit';
-import {addToBasket} from './action';
+import {
+  addActiveArticle,
+  addPriceFrom,
+  addPriceTo,
+  addStringsCount,
+  addToBasket,
+  addTypes,
+  changeDirection,
+  changeSort
+} from './actions';
 
 function randomInteger(min, max) {
   const rand = min + Math.random() * (max + 1 - min);
   return rand.toFixed(1);
 }
 
-const articlesData = [
+const findId = (array, id) => array.find((card) => card.id === id);
+
+const addNewId = (card, array) => {
+  const index = array.findIndex((item) => item.id === card.id);
+  if (index === -1) {
+    array.push(card);
+    return array;
+  }
+
+  return array;
+};
+
+const articles = [
   {
     id: 1,
     article: 'SO757575',
@@ -310,14 +331,44 @@ const articlesData = [
 ];
 
 const initialState = {
-  articles: articlesData,
+  articles: articles,
+  activeArticle: '',
+  sorting: 'price',
+  direction: '',
+  price: {
+    from: '',
+    to: '',
+  },
+  types: [],
+  strings: [],
   basket: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(addToBasket, (state, action) => {
-      state.basket.push(action.payload);
+      state.basket = addNewId(action.payload, state.basket);
+    })
+    .addCase(changeSort, (state, action) => {
+      state.sorting = action.payload;
+    })
+    .addCase(changeDirection, (state, action) => {
+      state.direction = action.payload;
+    })
+    .addCase(addPriceFrom, (state, action) => {
+      state.price.from = action.payload;
+    })
+    .addCase(addPriceTo, (state, action) => {
+      state.price.to = action.payload;
+    })
+    .addCase(addStringsCount, (state, action) => {
+      state.strings = action.payload;
+    })
+    .addCase(addTypes, (state, action) => {
+      state.types = action.payload;
+    })
+    .addCase(addActiveArticle, (state, action) => {
+      state.activeArticle = findId(state.articles, action.payload);
     });
 });
 
