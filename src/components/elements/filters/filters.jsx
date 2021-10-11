@@ -1,46 +1,28 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './filters.module.scss';
 import {useDispatch} from 'react-redux';
 import {addPriceFrom, addPriceTo, addStringsCount, addTypes} from '../../../store/actions';
-import cn from 'classnames';
-// import PriceInput from '../price-input/price-input';
-// import Checkbox from '../checkbox/checkbox';
-
-// const Labels = {
-//   PRICE: 'Цена, ₽',
-//   TYPE: 'Тип гитар',
-//   STRINGS: 'Количество струн',
-// };
-//
-// const initialState = {
-//   [Labels.PRICE]: [
-//     {id: 1, value: '', isValid: false, touched: false, placeholder: '1 000'},
-//     {id: 2, value: '', isValid: false, touched: false, placeholder: '30 000'},
-//   ],
-//   [Labels.STRINGS]: [
-//     {id: 1, value: '4', isChecked: false, disabled: false},
-//     {id: 2, value: '6', isChecked: false, disabled: false},
-//     {id: 3, value: '7', isChecked: false, disabled: false},
-//     {id: 4, value: '12', isChecked: false, disabled: false},
-//   ],
-//   [Labels.TYPE]: [
-//     {id: 1, value: 'Акустические гитары', isChecked: false, disabled: false},
-//     {id: 2, value: 'Электрогитары', isChecked: false, disabled: false},
-//     {id: 3, value: 'Укулеле', isChecked: false, disabled: false},
-//   ],
-// };
+// import cn from 'classnames';
+import Input from '../input/input';
 
 const stringsState = [
-  {id: 1, value: '4', isChecked: false, disabled: false},
-  {id: 2, value: '6', isChecked: false, disabled: false},
-  {id: 3, value: '7', isChecked: false, disabled: false},
-  {id: 4, value: '12', isChecked: false, disabled: false},
+  {id: 1, value: '4', label: '4', isChecked: false, disabled: false},
+  {id: 2, value: '6', label: '6', isChecked: false, disabled: false},
+  {id: 3, value: '7', label: '7', isChecked: false, disabled: false},
+  {id: 4, value: '12', label: '12', isChecked: false, disabled: false},
 ];
 
 const typesState = [
-  {id: 1, value: 'Акустические гитары', isChecked: false, disabled: false},
-  {id: 2, value: 'Электрогитары', isChecked: false, disabled: false},
-  {id: 3, value: 'Укулеле', isChecked: false, disabled: false},
+  {
+    id: 1,
+    label: 'Акустические гитары',
+    value: 'акустическая гитара',
+    isChecked: false,
+    disabled: false,
+    strings: ['6', '7', '12'],
+  },
+  {id: 2, label: 'Электрогитары', value: 'электрогитара', isChecked: false, disabled: false, strings: ['4', '6', '7']},
+  {id: 3, label: 'Укулеле', value: 'укулеле', isChecked: false, disabled: false, strings: ['4']},
 ];
 
 
@@ -49,6 +31,26 @@ function Filters() {
   const [priceFrom, setPriceFrom] = useState('');
   const [strings, setStrings] = useState(stringsState);
   const [types, setTypes] = useState(typesState);
+
+  useEffect(() => {
+    const activeTypes = types.filter((item) => item.isChecked);
+
+    const activeStrings = activeTypes.reduce((acc, current) => {
+      acc.push(...current.strings);
+      return acc;
+    }, []);
+
+    const activeStringsState = new Set(activeStrings);
+
+    setStrings((prev) => prev.map((item) => {
+      item.disabled = !activeStringsState.has(item.value);
+      if (!activeStringsState.size) {
+        item.disabled = false;
+      }
+      return item;
+    }));
+
+  }, [types]);
 
   const dispatch = useDispatch();
 
@@ -78,6 +80,29 @@ function Filters() {
     }
   };
 
+  const handleStringsChange = (e) => {
+    const {checked, value} = e.target;
+    const ass = strings.slice();
+    ass.forEach((item) => {
+      if (item.value === value) {
+        item.isChecked = checked;
+      }
+    });
+    setStrings(ass);
+  };
+
+  const handleTypesChange = (e) => {
+    const {checked, value} = e.target;
+    const ass = types.slice();
+    ass.forEach((item) => {
+      if (item.value === value) {
+        item.isChecked = checked;
+      }
+    });
+
+    setTypes(ass);
+  };
+
   const submit = (e) => {
     e.preventDefault();
     dispatch(addPriceFrom(priceFrom));
@@ -98,32 +123,10 @@ function Filters() {
     dispatch(addTypes(typesArray));
   };
 
-  const handleStringsChange = (e) => {
-    const {checked, value} = e.target;
-    const ass = strings.slice();
-    ass.forEach((item) => {
-      if (item.value === value) {
-        item.isChecked = checked;
-      }
-    });
-    setStrings(ass);
-  };
-
-  const handleTypesChange = (e) => {
-    const {checked, value} = e.target;
-    const ass = types.slice();
-    ass.forEach((item) => {
-      if (item.value === value) {
-        item.isChecked = checked;
-      }
-    });
-    setTypes(ass);
-  };
-
   return (
     <section className={styles.filter}>
       <h2 className={styles.title}>Фильтр</h2>
-      <form action="" method="post" onSubmit={submit}>
+      <form action='' method='post' onSubmit={submit}>
         <fieldset className={styles.fieldset}>
           <legend className={styles.legend}>Цена, ₽</legend>
           <ul className={styles.price_list}>
@@ -131,10 +134,10 @@ function Filters() {
               <input
                 className={styles.price_input}
                 onChange={handlePriceChange}
-                name="from"
+                name='from'
                 value={priceFrom}
-                type="text"
-                placeholder={'1 000'}
+                type='text'
+                placeholder='1 000'
                 onBlur={handlePriceBlue}
               />
             </li>
@@ -142,110 +145,56 @@ function Filters() {
               <input
                 onChange={handlePriceChange}
                 className={styles.price_input}
-                name="to"
+                name='to'
                 value={priceTo}
-                type="text"
-                placeholder={'30 000'}
+                type='text'
+                placeholder='30 000'
                 onBlur={handlePriceBlue}
               />
             </li>
           </ul>
         </fieldset>
         <fieldset className={styles.fieldset}>
-          <legend className={styles.legend}>Количество струн</legend>
+          <legend className={styles.legend}>Тип гитары</legend>
           <ul>
-            <li className={styles.item}>
-              <label className={styles.label}>
-                <input
-                  className={cn(styles.input, 'visually-hidden')}
-                  type="checkbox"
-                  name="string"
-                  value={4}
-                  onChange={handleStringsChange}
-                />
-                <span className={styles.span}>4</span>
-              </label>
-            </li>
-            <li className={styles.item}>
-              <label className={styles.label}>
-                <input
-                  className={cn(styles.input, 'visually-hidden')}
-                  type="checkbox"
-                  name="string"
-                  value={6}
-                  onChange={handleStringsChange}
-                />
-                <span className={styles.span}>6</span>
-              </label>
-            </li>
-            <li className={styles.item}>
-              <label className={styles.label}>
-                <input
-                  className={cn(styles.input, 'visually-hidden')}
-                  type="checkbox"
-                  name="string"
-                  value={7}
-                  onChange={handleStringsChange}
-                />
-                <span className={styles.span}>7</span>
-              </label>
-            </li>
-            <li className={styles.item}>
-              <label className={styles.label}>
-                <input
-                  className={cn(styles.input, 'visually-hidden')}
-                  type="checkbox"
-                  name="string"
-                  value={12}
-                  onChange={handleStringsChange}
-                />
-                <span className={styles.span}>12</span>
-              </label>
-            </li>
+            {
+              typesState.map(({id, label, value, isChecked, disabled}) => (
+                <li key={id} className={styles.item}>
+                  <Input
+                    type='checkbox'
+                    name='type'
+                    value={value}
+                    label={label}
+                    checked={isChecked}
+                    disabled={disabled}
+                    onChange={handleTypesChange}
+                  />
+                </li>
+              ))
+            }
           </ul>
         </fieldset>
         <fieldset className={styles.fieldset}>
           <legend className={styles.legend}>Количество струн</legend>
           <ul>
-            <li className={styles.item}>
-              <label className={styles.label}>
-                <input
-                  className={cn(styles.input, 'visually-hidden')}
-                  type="checkbox"
-                  name="type"
-                  value={'Акустические гитары'}
-                  onChange={handleTypesChange}
-                />
-                <span className={styles.span}>Акустические гитары</span>
-              </label>
-            </li>
-            <li className={styles.item}>
-              <label className={styles.label}>
-                <input
-                  className={cn(styles.input, 'visually-hidden')}
-                  type="checkbox"
-                  name="type"
-                  value={'Электрогитары'}
-                  onChange={handleTypesChange}
-                />
-                <span className={styles.span}>Электрогитары</span>
-              </label>
-            </li>
-            <li className={styles.item}>
-              <label className={styles.label}>
-                <input
-                  className={cn(styles.input, 'visually-hidden')}
-                  type="checkbox"
-                  name="type"
-                  value={'Укулеле'}
-                  onChange={handleTypesChange}
-                />
-                <span className={styles.span}>Укулеле</span>
-              </label>
-            </li>
+            {
+              strings.map(({id, value, label, isChecked, disabled}) => (
+                <li key={id} className={styles.item}>
+                  <Input
+                    value={value}
+                    label={label}
+                    type="checkbox"
+                    name="string"
+                    onChange={handleStringsChange}
+                    checked={isChecked}
+                    disabled={disabled}
+                  />
+                </li>
+              ))
+            }
           </ul>
         </fieldset>
-        <button className={styles.submit} type="submit">Показать</button>
+        <button className={styles.submit} type='submit'>Показать</button>
       </form>
     </section>
   );

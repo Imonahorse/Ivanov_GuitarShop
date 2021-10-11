@@ -9,7 +9,12 @@ import {AppRoutes} from '../../../const';
 import {selectBasket} from '../../../store/selectors';
 import {useSelector} from 'react-redux';
 
-const links = ['Каталог', 'Где купить?', 'О компании', 'Сервис-центры'];
+const links = [
+  'Каталог',
+  'Где купить?',
+  'О компании',
+  'Сервис-центры',
+];
 const userMenuIcons = [
   {
     description: 'Map',
@@ -33,7 +38,7 @@ function Header() {
 
   return (
     <header className={styles.header}>
-      <div className="container">
+      <div className='container'>
         <nav className={styles.nav}>
           <div className={styles.logo}>
             <Logo/>
@@ -42,7 +47,7 @@ function Header() {
             {
               links.map((link) => (
                 <li className={styles.site_menu__item} key={link}>
-                  <a className={styles.link} href="/">{link}</a>
+                  <a className={styles.link} href='/'>{link}</a>
                 </li>
               ))
             }

@@ -25,10 +25,10 @@ function Article({info}) {
       <div className={styles.image_container}>
         <img
           className={styles.image}
-          width="68"
-          height="190"
+          width='68'
+          height='190'
           src={img}
-          alt="Изображение товара"
+          alt='Изображение товара'
         />
       </div>
       <div className={styles.description}>
@@ -49,17 +49,13 @@ function Article({info}) {
           <p className={styles.count}>{vote}</p>
         </div>
         <div className={styles.controls}>
-          <Button
-            small
-            gray
-            href="/"
-          >
+          <a href='/' className={styles.link}>
             Подробнее
-          </Button>
+          </a>
           <Button
             small
             orange
-            type="button"
+            type='button'
             onClick={() => handleBuyClick(id)}
           >
             Купить

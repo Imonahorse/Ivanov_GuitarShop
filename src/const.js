@@ -1,6 +1,5 @@
 const AppRoutes = {
-  MAIN: '/',
-  CATALOG: '/catalog',
+  CATALOG: '/',
   BASKET: '/basket',
 };
 
@@ -15,14 +14,10 @@ const SortButtons = {
 };
 
 const SortingTypes = (sortType, sortDirection) => {
-  switch(sortDirection) {
-    case SortButtons.FROM_LOW_TO_HIGH:
-      return (a, b) => a[sortType] - b[sortType];
-    case SortButtons.FROM_HIGH_TO_LOW:
-      return (a, b) => b[sortType] - a[sortType];
-    default:
-      return (a, b) => a[sortType] - b[sortType];
+  if (sortDirection === SortButtons.FROM_HIGH_TO_LOW) {
+    return (a, b) => b[sortType] - a[sortType];
   }
+  return (a, b) => a[sortType] - b[sortType];
 };
 
 // const SortingTypes = {

@@ -9,9 +9,24 @@ const ActionsTypes = {
   ADD_TYPES: 'addTypes',
   ADD_ACTIVE_ARTICLE: 'addActiveArticle',
   CHANGE_SORT_DIRECTION: 'changeSortDirection',
+  DELETE_FROM_BASKET: 'deleteFromBasket',
+  ADD_TOTAL_PRICE: 'addTotalPrice',
+  CHANGE_GUITAR_COUNT: 'changeGuitarCount',
 };
 
+const addTotalPrice = createAction(ActionsTypes.ADD_TOTAL_PRICE, (price) => ({
+  payload: price,
+}));
+
+const changeGuitarCount = createAction(ActionsTypes.CHANGE_GUITAR_COUNT, (count) => ({
+  payload: count,
+}));
+
 const addToBasket = createAction(ActionsTypes.ADD_TO_BASKET, (article) => ({
+  payload: article,
+}));
+
+const deleteFromBasket = createAction(ActionsTypes.DELETE_FROM_BASKET, (article) => ({
   payload: article,
 }));
 
@@ -51,5 +66,8 @@ export {
   addStringsCount,
   addTypes,
   addActiveArticle,
-  changeDirection
+  changeDirection,
+  deleteFromBasket,
+  addTotalPrice,
+  changeGuitarCount
 };

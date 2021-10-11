@@ -32,6 +32,15 @@ const filterByType = (item, types) => {
   return types.some((type) => type.toLowerCase() === item.type.toLowerCase());
 };
 
+const getTotalPriceCount = (total) => {
+  let result = 0;
+  total.forEach(({id, price, count}) => {
+    const newPrice = count * price;
+    return result += newPrice;
+  });
+  return result;
+};
+
 export const selectArticles = (state) => state.articles;
 
 export const selectActiveSort = (state) => state.sorting;
@@ -47,6 +56,8 @@ export const selectActiveArticle = (state) => state.activeArticle;
 export const selectBasket = (state) => state.basket;
 
 export const selectDirection = (state) => state.direction;
+
+export const selectTotalPrice = (state) => getTotalPriceCount(state.price.total);
 
 export const selectFilteredByPriceArticles = createSelector(selectArticles, selectPrice, selectStringsCount, selectTypes,
   (articles, price, strings, types) => (

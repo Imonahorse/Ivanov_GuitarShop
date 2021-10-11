@@ -5,18 +5,18 @@ import cn from 'classnames';
 
 function Pagination({articles, articlesPerPage, paginate, currentPage, nextPage, prevPage}) {
   const pageNumbers = [];
+
   for (let i = 1; i <= Math.ceil(articles / articlesPerPage); i++) {
     pageNumbers.push(i);
   }
 
-
   return (
     <section className={styles.pagination}>
-      <h2 className="visually-hidden">Пагинация</h2>
+      <h2 className='visually-hidden'>Пагинация</h2>
       <div className={styles.wrapper}>
         {
           currentPage > 1 &&
-          <button className={cn(styles.button, styles.button__back)} type="button" onClick={prevPage}>Назад</button>
+          <button className={cn(styles.button, styles.button__back)} type='button' onClick={prevPage}>Назад</button>
         }
         <ul className={styles.list}>
           {
@@ -25,7 +25,7 @@ function Pagination({articles, articlesPerPage, paginate, currentPage, nextPage,
               <li className={styles.item} key={page}>
                 <a
                   className={cn(styles.link, {[styles.active]: page === currentPage})}
-                  href="/#"
+                  href='/#'
                   onClick={() => paginate(page)}
                 >
                   {page}
@@ -36,7 +36,7 @@ function Pagination({articles, articlesPerPage, paginate, currentPage, nextPage,
         </ul>
         {
           currentPage < pageNumbers.length &&
-          <button className={styles.button} type="button" onClick={nextPage}>Далее</button>
+          <button className={styles.button} type='button' onClick={nextPage}>Далее</button>
         }
       </div>
     </section>

@@ -8,6 +8,18 @@
   background-color: rgba(#9B9A9A, 0.5);
 }
 
+.close {
+  position: absolute;
+  top: 22px;
+  right: 23px;;
+  width: 12px;
+  height: 12px;
+
+  background: url('../basket-article/close.svg');
+  border: none;
+  cursor: pointer;
+}
+
 .content {
   position: absolute;
   top: 50%;
@@ -16,16 +28,22 @@
   width: 740px;
   height: 230px;
   padding: 30px 50px 32px 50px;
+  border-radius: 2px;
 
   background-color: var(--white);
+
+  &__second {
+    height: 185px;
+    padding-bottom: 54px;
+  }
 }
 
 .title {
-  margin: 0 0 25px 0;
+  margin: 0 0 39px 0;
 
   font-size: 18px;
   line-height: 15px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.7px;
   color: #474747;
 }
 
@@ -72,6 +90,9 @@
 }
 
 .button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-left: auto;
   width: 220px;
   min-height: 46px;
@@ -83,4 +104,15 @@
   letter-spacing: 0.05em;
   border: none;
   color: #FFFFFF;
+  cursor: pointer;
+
+  &__left {
+    margin-right: 37px;
+  }
+}
+
+.controls {
+  display: flex;
+  width: max-content;
+  margin:  0 auto;
 }

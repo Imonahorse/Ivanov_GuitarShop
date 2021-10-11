@@ -76,6 +76,7 @@
   border-radius: 2px;
   cursor: pointer;
   letter-spacing: 1px;
+  text-align: center;
 }
 
 .button {
@@ -97,8 +98,4 @@
   line-height: 15px;
   letter-spacing: 0.1em;
   color: var(--gray-4);
-}
-
-.test {
-  border: red;
 }

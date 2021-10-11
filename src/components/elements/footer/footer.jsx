@@ -5,12 +5,27 @@ import instagramIcon from './instagram.svg';
 import twitterIcon from './twitter.svg';
 import Logo from '../logo/logo';
 
-const catalogLinks = ['Акустические гитары', 'Классические гитары', 'Электрогитары', 'Бас-гитары', 'Укулеле'];
-const infoLinks = ['Где купить?', 'Блог', 'Вопрос - ответ', 'Возврат', 'Сервис-Центры'];
+const catalogLinks = [
+  'Акустические гитары',
+  'Классические гитары',
+  'Электрогитары',
+  'Бас-гитары',
+  'Укулеле',
+];
+
+const infoLinks = [
+  'Где купить?',
+  'Блог',
+  'Вопрос - ответ',
+  'Возврат',
+  'Сервис-Центры',
+];
+
 const descriptions = [
   'Магазин гитар, музыкальных инструментов и гитарная мастерская в Санкт-Петербурге.',
   'Все инструменты проверены, отстроены и доведены до идеала!',
 ];
+
 const socials = [
   {
     description: 'Facebook',
@@ -38,7 +53,7 @@ function Footer() {
             {
               socials.map(({description, img}) => (
                 <li className={styles.social_item} key={description}>
-                  <a className={styles.link} href="/">
+                  <a className={styles.link} href='/'>
                     <img src={img} alt={description}/>
                   </a>
                 </li>
@@ -65,7 +80,7 @@ function Footer() {
               {
                 catalogLinks.map((link) => (
                   <li className={styles.catalog_item} key={link}>
-                    <a className={styles.link} href="/">{link}</a>
+                    <a className={styles.link} href='/'>{link}</a>
                   </li>
                 ))
               }
@@ -77,7 +92,7 @@ function Footer() {
               {
                 infoLinks.map((link) => (
                   <li className={styles.info_item} key={link}>
-                    <a className={styles.link} href="/">{link}</a>
+                    <a className={styles.link} href='/'>{link}</a>
                   </li>
                 ))
               }
@@ -89,7 +104,7 @@ function Footer() {
           <ul>
             <li className={styles.contacts_item}>
               <address className={styles.address}>г. Санкт-Петербург, м. Невский проспект, ул. Казанская 6.</address>
-              <a className={styles.tel} href="tel:88125005050">8-812-500-50-50</a>
+              <a className={styles.tel} href='tel:88125005050'>8-812-500-50-50</a>
             </li>
             <li className={styles.contacts_item}>
               <p className={styles.time}>Режим работы:

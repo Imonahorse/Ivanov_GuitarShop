@@ -1,40 +1,67 @@
 .article {
   position: relative;
   display: flex;
+  align-items: flex-start;
   padding: 20px 0;
 
   border-top: 0.7px solid var(--gray);
   border-bottom: 0.7px solid var(--gray);
 }
 
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
 .close {
   position: absolute;
   top: 22px;
+  left: 3px;
   width: 12px;
   height: 12px;
 
   background: url('./close.svg');
   border: none;
   cursor: pointer;
+
+  &__popup {
+    left: auto;
+    right: 23px;
+  }
 }
 
 .img {
   display: flex;
   justify-content: center;
-  width: 156px;
+  width: 160px;
   height: 124px;
   padding-right: 27px;
+
+  &__popup {
+    width: 56px;
+    padding-right: 0;
+    margin: -12px 50px 0 0;
+  }
 }
 
 .inner {
   display: flex;
   align-items: flex-start;
-  padding-bottom: 52px;
+  min-height: 73px;
+
+  &__popup {
+    width: 100%;
+  }
 }
 
 .info {
   width: 356px;
   padding-right: 20px;
+
+  &__popup {
+    width: auto;
+    padding-right: 0;
+  }
 }
 
 .title,
@@ -62,6 +89,10 @@
 
 .description {
   letter-spacing: 1.3px;
+
+  &__popup {
+    margin-bottom: 20px;
+  }
 }
 
 .control {
@@ -127,10 +158,16 @@
   width: 173px;
   align-self: flex-end;
   padding-right: 20px;
+
+  &__popup {
+    width: auto;
+    letter-spacing: 1px;
+    font-weight: bold;
+  }
 }
 
 .total {
-  width: 173px;
+  width: 169px;
   align-self: flex-end;
   padding-left: 20px;
 
@@ -138,4 +175,16 @@
   text-align: end;
 }
 
-
+.buy {
+    margin-left: auto;
+    width: 220px;
+    min-height: 46px;
+    background: #E27F00;
+    border-radius: 2px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 15px;
+    letter-spacing: 0.05em;
+    border: none;
+    color: #FFFFFF;
+}

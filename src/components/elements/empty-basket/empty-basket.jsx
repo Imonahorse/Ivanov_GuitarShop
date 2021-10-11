@@ -2,8 +2,8 @@ import React from 'react';
 
 function EmptyBasket() {
   return(
-    <section>
-      <h2>Корзина пуста</h2>
+    <section style={{minHeight: '250px'}}>
+      <h2 style={{fontSize:'50px'}}>В корзине пусто ☻</h2>
     </section>
   );
 }

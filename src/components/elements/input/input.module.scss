@@ -1,7 +1,6 @@
 .label {
   font-size: 16px;
   line-height: 19px;
-  letter-spacing: 0.5px;
 }
 
 .span {
@@ -38,4 +37,11 @@
 
 .input:focus + span {
   outline-color: 2px solid var(--orange);
+}
+
+.input:disabled + .span:before {
+  background: var(--gray-7);
+  border: 0.7px solid var(--gray-6);
+  color: var(--gray-6);
+  cursor: auto;
 }

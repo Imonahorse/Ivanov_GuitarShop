@@ -1,6 +1,6 @@
-import electricGuitar from '../components/elements/article-list/guitar-1.png';
-import ukulele from '../components/elements/article-list/guitar-3.png';
-import acousticGuitar from '../components/elements/article-list/guitar-4.png';
+import electricGuitar from '../components/elements/articles-list/guitar-1.png';
+import ukulele from '../components/elements/articles-list/guitar-3.png';
+import acousticGuitar from '../components/elements/articles-list/guitar-4.png';
 import {createReducer} from '@reduxjs/toolkit';
 import {
   addActiveArticle,
@@ -10,7 +10,9 @@ import {
   addToBasket,
   addTypes,
   changeDirection,
-  changeSort
+  changeSort,
+  deleteFromBasket,
+  addTotalPrice, changeGuitarCount
 } from './actions';
 
 function randomInteger(min, max) {
@@ -27,6 +29,26 @@ const addNewId = (card, array) => {
     return array;
   }
 
+  return array;
+};
+
+const changeCount = (card, array) => {
+  const index = array.findIndex((item) => item.id === card.id);
+  if (index === -1) {
+    return array;
+  }
+
+  return [...array.slice(0, index), card, ...array.slice(index + 1)];
+};
+
+
+const deleteId = (card, array) => {
+  const index = array.findIndex((item) => item.id === card.id);
+  if (index === -1) {
+    return;
+  }
+
+  array.splice(index, 1);
   return array;
 };
 
@@ -333,11 +355,12 @@ const articles = [
 const initialState = {
   articles: articles,
   activeArticle: '',
-  sorting: 'price',
+  sorting: '',
   direction: '',
   price: {
     from: '',
     to: '',
+    total: [],
   },
   types: [],
   strings: [],
@@ -348,6 +371,16 @@ const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(addToBasket, (state, action) => {
       state.basket = addNewId(action.payload, state.basket);
+      state.price.total = state.basket.map((item) => ({id: item.id, price: item.price, count: 1}));
+    })
+    .addCase(changeGuitarCount, (state, action) => {
+      state.price.total = changeCount(action.payload, state.price.total);
+    })
+    .addCase(deleteFromBasket, (state, action) => {
+      state.basket = deleteId(action.payload, state.basket);
+    })
+    .addCase(addTotalPrice, (state, action) => {
+      state.price.total = addNewId(action.payload, state.price.total);
     })
     .addCase(changeSort, (state, action) => {
       state.sorting = action.payload;
