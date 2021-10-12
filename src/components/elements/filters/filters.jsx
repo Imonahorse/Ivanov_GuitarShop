@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import styles from './filters.module.scss';
 import {useDispatch} from 'react-redux';
 import {addPriceFrom, addPriceTo, addStringsCount, addTypes} from '../../../store/actions';
-// import cn from 'classnames';
 import Input from '../input/input';
+import Button from '../button/button';
 
 const stringsState = [
   {id: 1, value: '4', label: '4', isChecked: false, disabled: false},
@@ -21,8 +21,22 @@ const typesState = [
     disabled: false,
     strings: ['6', '7', '12'],
   },
-  {id: 2, label: 'Электрогитары', value: 'электрогитара', isChecked: false, disabled: false, strings: ['4', '6', '7']},
-  {id: 3, label: 'Укулеле', value: 'укулеле', isChecked: false, disabled: false, strings: ['4']},
+  {
+    id: 2,
+    label: 'Электрогитары',
+    value: 'электрогитара',
+    isChecked: false,
+    disabled: false,
+    strings: ['4', '6', '7'],
+  },
+  {
+    id: 3,
+    label: 'Укулеле',
+    value: 'укулеле',
+    isChecked: false,
+    disabled: false,
+    strings: ['4'],
+  },
 ];
 
 
@@ -82,44 +96,53 @@ function Filters() {
 
   const handleStringsChange = (e) => {
     const {checked, value} = e.target;
-    const ass = strings.slice();
-    ass.forEach((item) => {
+    const arr = strings.slice();
+    arr.forEach((item) => {
       if (item.value === value) {
         item.isChecked = checked;
       }
     });
-    setStrings(ass);
+
+    setStrings(arr);
   };
 
   const handleTypesChange = (e) => {
     const {checked, value} = e.target;
-    const ass = types.slice();
-    ass.forEach((item) => {
+    const arr = types.slice();
+    arr.forEach((item) => {
       if (item.value === value) {
         item.isChecked = checked;
       }
     });
 
-    setTypes(ass);
+    setTypes(arr);
   };
 
   const submit = (e) => {
     e.preventDefault();
+
     dispatch(addPriceFrom(priceFrom));
+
     dispatch(addPriceTo(priceTo));
+
     const stringArray = [];
+
     strings.forEach((item) => {
       if (item.isChecked) {
         stringArray.push(item.value);
       }
     });
+
     const typesArray = [];
+
     types.forEach((item) => {
       if (item.isChecked) {
         typesArray.push(item.value);
       }
     });
+
     dispatch(addStringsCount(stringArray));
+
     dispatch(addTypes(typesArray));
   };
 
@@ -183,8 +206,8 @@ function Filters() {
                   <Input
                     value={value}
                     label={label}
-                    type="checkbox"
-                    name="string"
+                    type='checkbox'
+                    name='string'
                     onChange={handleStringsChange}
                     checked={isChecked}
                     disabled={disabled}
@@ -194,7 +217,7 @@ function Filters() {
             }
           </ul>
         </fieldset>
-        <button className={styles.submit} type='submit'>Показать</button>
+        <Button gray className={styles.submit} type='submit'>Показать</Button>
       </form>
     </section>
   );

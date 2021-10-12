@@ -20,11 +20,6 @@ const SortingTypes = (sortType, sortDirection) => {
   return (a, b) => a[sortType] - b[sortType];
 };
 
-// const SortingTypes = {
-//   [SortOptions.PRICE]: (a, b) => b.price - a.price,
-//   [SortOptions.POPULAR]: (a, b) => b.vote - a.vote,
-// };
-
 const makePriceString = (value) => value.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1 ').trim();
 
 

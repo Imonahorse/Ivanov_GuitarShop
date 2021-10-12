@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styles from './popup.module.scss';
+import styles from './modal.module.scss';
 import PropTypes from 'prop-types';
 import {selectActiveArticle} from '../../../store/selectors';
 import {useDispatch, useSelector} from 'react-redux';
@@ -7,8 +7,13 @@ import BasketArticle from '../basket-article/basket-article';
 import {addToBasket} from '../../../store/actions';
 import cn from 'classnames';
 import {Link} from 'react-router-dom';
+import ReactModal from 'react-modal';
+import Button from '../button/button';
+import {AppRoutes} from '../../../const';
 
-function Popup({setModalOpen}) {
+ReactModal.setAppElement('#root');
+
+function Modal({setModalOpen, modalOpen}) {
   const article = useSelector(selectActiveArticle);
   const dispatch = useDispatch();
   const [firstPopupState, setFirstPopupState] = useState(true);
@@ -24,13 +29,29 @@ function Popup({setModalOpen}) {
     dispatch(addToBasket(article));
   };
 
+  const handleAfterOpen = () => {
+    document.body.classList.add(styles.open);
+  };
+
+  const handleAfterClose = () => {
+    document.body.classList.remove(styles.open);
+  };
+
   return (
-    <section className={styles.popup}>
-      <div className={cn(styles.content, {[styles.content__second]: secondPopupState})}>
+    <ReactModal
+      isOpen={modalOpen}
+      contentLabel={'Добавить в корзину'}
+      overlayClassName={styles.modal}
+      className={cn(styles.content, {[styles.content__second]: secondPopupState})}
+      onRequestClose={handleCloseModalClick}
+      onAfterOpen={handleAfterOpen}
+      onAfterClose={handleAfterClose}
+    >
+      <section>
         <button
           className={styles.close}
           onClick={handleCloseModalClick}
-          type="button"
+          type='button'
         />
         {
           firstPopupState &&
@@ -49,61 +70,28 @@ function Popup({setModalOpen}) {
           <>
             <h2 className={styles.title}>Товар успешно добавлен в корзину</h2>
             <div className={styles.controls}>
-              <Link to={'/basket'} className={cn(styles.button, styles.button__left)}>Перейти в корзину</Link>
-              <button className={styles.button} onClick={handleCloseModalClick}>Продолжить покупки</button>
+              <Link to={AppRoutes.BASKET} className={cn(styles.button, styles.button__left)}>
+                Перейти в корзину
+              </Link>
+              <Button
+                orange
+                className={styles.button}
+                onClick={handleCloseModalClick}
+              >
+                Продолжить покупки
+              </Button>
             </div>
           </>
         }
-      </div>
-    </section>
+      </section>
+    </ReactModal>
   );
 }
 
-{/*// <div className={styles.wrapper}>*/
-}
-{/*//   <div className={styles.img}>*/
-}
-{/*//     <img*/
-}
-{/*//       src={img}*/
-}
-{/*//       width="56"*/
-}
-{/*//       height="128"*/
-}
-{/*//       alt="Гитара"*/
-}
-{/*//     />*/
-}
-{/*//   </div>*/
-}
-{/*//   <div className={styles.info}>*/
-}
-{/*//     <h3 className={styles.name}>{name}</h3>*/
-}
-{/*//     <p className={styles.number}>Артикул: SO757575</p>*/
-}
-{/*//     <p className={styles.description}>*/
-}
-{/*      <span>{type}</span>*/
-}
-{/*      ,*/
-}
-{/*      <span>{} струнная</span>*/
-}
-{/*    </p>*/
-}
-{/*    <p className={styles.price}>Цена: {makePriceString(price)} ₽</p>*/
-}
-{/*  </div>*/
-}
-{/*  <button className={styles.button} onClick={handleBuyClick}>Добавить в корзину</button>*/
-}
-{/*</div>*/
-}
 
-Popup.propTypes = {
+Modal.propTypes = {
   setModalOpen: PropTypes.func.isRequired,
+  modalOpen: PropTypes.bool.isRequired,
 };
 
-export default Popup;
+export default Modal;

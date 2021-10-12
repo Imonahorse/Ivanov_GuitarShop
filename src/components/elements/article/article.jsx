@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
 import ReactStars from 'react-rating-stars-component/dist/react-stars';
 import styles from './article.module.scss';
-import PropTypes from 'prop-types';
 import Button from '../button/button';
 import {makePriceString} from '../../../const';
-import Popup from '../popup/popup';
+import Modal from '../modal/modal';
 import {useDispatch} from 'react-redux';
 import {addActiveArticle} from '../../../store/actions';
+import articleProps from './article-props';
 
 const YELLOW = '#FFD168';
+const RATING_SIZE = 15;
+const RATING_COUNT = 5;
 
 function Article({info}) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -39,21 +41,21 @@ function Article({info}) {
         <div className={styles.rating}>
           <ReactStars
             classNames={styles.stars}
-            count={5}
-            size={15}
+            count={RATING_COUNT}
+            size={RATING_SIZE}
             isHalf
             edit={false}
             activeColor={YELLOW}
-            value={rating}
+            value={Number(rating)}
           />
           <p className={styles.count}>{vote}</p>
         </div>
         <div className={styles.controls}>
-          <a href='/' className={styles.link}>
+          <Button gray href='/' className={styles.link}>
             Подробнее
-          </a>
+          </Button>
           <Button
-            small
+            img
             orange
             type='button'
             onClick={() => handleBuyClick(id)}
@@ -62,20 +64,13 @@ function Article({info}) {
           </Button>
         </div>
       </div>
-      {modalOpen && <Popup setModalOpen={setModalOpen}/>}
+      {modalOpen && <Modal setModalOpen={setModalOpen} modalOpen={modalOpen}/>}
     </article>
   );
 }
 
 Article.propTypes = {
-  info: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    vote: PropTypes.number.isRequired,
-    img: PropTypes.string.isRequired,
-  }).isRequired,
+  info: articleProps,
 };
 
 export default Article;

@@ -1,7 +1,6 @@
 .pagination {
   display: flex;
   flex-direction: row-reverse;
-  padding-bottom: 60px;
 }
 
 .wrapper {
@@ -39,8 +38,10 @@
   min-width: 24px;
   height: 24px;
   padding: 2px 8px 2px 9px;
+  background-color: transparent;
+  cursor: pointer;
 
-  border: 0.7px solid #9F9E9E;
+  border: 0.7px solid var(--gray-4);
   border-radius: 2px;
 
   &:hover {
@@ -54,7 +55,7 @@
 
 .active {
   color: var(--white);
-  background-color: #585757;
+  background-color: var(--gray-8);
 
   &:hover{
     opacity: 1;
@@ -70,13 +71,13 @@
   min-height: 24px;
   padding: 2px 20px 2px 22px;
 
-  border: 0.7px solid #9F9E9E;
+  border: 0.7px solid var(--gray-4);
   border-radius: 2px;
   background-color: transparent;
   cursor: pointer;
 
   &:hover {
-    background-color: #585757;
+    background-color: var(--gray-8);
     color: var(--white);
   }
 

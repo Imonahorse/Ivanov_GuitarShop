@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import {makePriceString} from '../../../const';
 import {useDispatch} from 'react-redux';
 import {changeGuitarCount, deleteFromBasket} from '../../../store/actions';
+import articleProps from './../article/article-props';
+import Button from '../button/button';
 
 const BasketImage = {
   WIDTH: '48',
@@ -16,30 +18,33 @@ const PopupImage = {
   HEIGHT: '128',
 };
 
-function BasketArticle({info, popup = false, handleAddToBasketClick, handleCloseModalClick}) {
+const MAX_COUNT = 10;
+const MIN_COUNT = 1;
+
+function BasketArticle({info, popup, handleAddToBasketClick, handleCloseModalClick}) {
   const {id, name, price, img, type, strings, article} = info;
-  const [guitarCount, setGuitarCount] = useState(1);
+  const [guitarCount, setGuitarCount] = useState(MIN_COUNT);
   const dispatch = useDispatch();
   const isBasket = !popup;
   const imageWidth = (isBasket && BasketImage) || (popup && PopupImage);
 
   useEffect(() => {
     dispatch(changeGuitarCount({id: id, price: price, count: guitarCount}));
-  }, [guitarCount]);
+  }, [guitarCount, dispatch, id, price]);
 
   const handleGuitarCountMinus = () => {
-    setGuitarCount((prev) => prev === 1 ? 1 : prev - 1);
+    setGuitarCount((prev) => prev === MIN_COUNT ? MIN_COUNT : prev - MIN_COUNT);
     dispatch(changeGuitarCount({id: id, price: price, count: guitarCount}));
   };
 
   const handleGuitarCountPlus = () => {
-    setGuitarCount((prev) => prev === 10 ? 10 : prev + 1);
+    setGuitarCount((prev) => prev === MAX_COUNT ? MAX_COUNT : prev + MIN_COUNT);
     dispatch(changeGuitarCount({id: id, price: price, count: guitarCount}));
   };
 
   const priceElement = (
     <p className={cn(styles.price, {[styles.price__popup]: popup})}>
-      {popup && 'Цена:'} {makePriceString(price)} ₽
+      {popup && 'Цена: '} {makePriceString(price)} ₽
     </p>
   );
 
@@ -58,14 +63,14 @@ function BasketArticle({info, popup = false, handleAddToBasketClick, handleClose
           onClick={handleGuitarCountPlus}
         />
       </div>
-      <p className={styles.total}>{guitarCount * price} ₽</p>
+      <p className={styles.total}>{makePriceString(guitarCount * price)} ₽</p>
     </>
   );
 
   const addToBasketButtonElement = (
-    <button className={styles.buy} onClick={handleAddToBasketClick}>
+    <Button orange className={styles.buy} onClick={handleAddToBasketClick}>
       Добавить в корзину
-    </button>
+    </Button>
   );
 
   const deleteArticleFromBasket = () => {
@@ -110,18 +115,14 @@ function BasketArticle({info, popup = false, handleAddToBasketClick, handleClose
 }
 
 BasketArticle.propTypes = {
-  handleCloseModalClick: PropTypes.func,
-  handleAddToBasketClick: PropTypes.func,
+  handleCloseModalClick: PropTypes.func.isRequired,
+  handleAddToBasketClick: PropTypes.func.isRequired,
   popup: PropTypes.bool,
-  info: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    article: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    strings: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    img: PropTypes.string.isRequired,
-  }).isRequired,
+  info: articleProps,
+};
+
+BasketArticle.defaultProps = {
+  popup: false,
 };
 
 export default BasketArticle;

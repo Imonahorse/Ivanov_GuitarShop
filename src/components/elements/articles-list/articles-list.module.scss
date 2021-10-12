@@ -19,4 +19,10 @@
 
 .basket_item {
   min-height: 164px;
+
+  border-top: 0.7px solid var(--gray);
+
+  &:last-child {
+    border-bottom: 0.7px solid var(--gray);
+  }
 }

@@ -1,11 +1,35 @@
-.popup {
+@keyframes appear {
+  0% {
+    transform: translate(-50%, -2000px);
+  }
+
+  30% {
+    transform: translate(-50%, -280px);
+  }
+
+  60% {
+    transform: translate(-50%, -40px);
+  }
+
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}
+
+.modal {
   z-index: 10;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+
   background-color: rgba(#9B9A9A, 0.5);
+}
+
+.open {
+  overflow: hidden;
+  padding-right: 17px;
 }
 
 .close {
@@ -30,6 +54,8 @@
   padding: 30px 50px 32px 50px;
   border-radius: 2px;
 
+  animation: appear 0.5s;
+
   background-color: var(--white);
 
   &__second {
@@ -44,7 +70,7 @@
   font-size: 18px;
   line-height: 15px;
   letter-spacing: 0.7px;
-  color: #474747;
+  color: var(--gray-3);
 }
 
 .wrapper {
@@ -96,15 +122,19 @@
   margin-left: auto;
   width: 220px;
   min-height: 46px;
-  background: #E27F00;
+  background: var(--orange);
   border-radius: 2px;
   font-weight: bold;
   font-size: 16px;
   line-height: 15px;
   letter-spacing: 0.05em;
   border: none;
-  color: #FFFFFF;
+  color: var(--white);
   cursor: pointer;
+
+  &:hover {
+    opacity: 0.5;
+  }
 
   &__left {
     margin-right: 37px;
@@ -114,5 +144,5 @@
 .controls {
   display: flex;
   width: max-content;
-  margin:  0 auto;
+  margin: 0 auto;
 }

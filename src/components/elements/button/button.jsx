@@ -3,13 +3,14 @@ import cn from 'classnames';
 import PropTypes from 'prop-types';
 import styles from './button.module.scss';
 
-function Button({orange, gray, small, className, disabled, onClick, children, ...attrs}){
+function Button({img, orange, gray, className, disabled, onClick, children, ...attrs}){
 
   const Tag = attrs.href ? 'a' : 'button';
   const buttonClass = cn(
-    {[styles.small]: small},
     {[styles.orange]: orange},
     {[styles.gray]: gray},
+    {[styles.button__img]: img},
+    styles.button,
     className,
   );
 
@@ -26,8 +27,8 @@ function Button({orange, gray, small, className, disabled, onClick, children, ..
 }
 
 Button.propTypes = {
-  small: PropTypes.bool,
-  children: PropTypes.node,
+  img: PropTypes.bool,
+  children: PropTypes.string,
   gray: PropTypes.bool,
   className: PropTypes.string,
   onClick: PropTypes.func,

@@ -14,12 +14,13 @@ function Preview() {
   const [articlesPerPage] = useState(articlePerPage);
 
   useEffect(() => {
-    const pageCount = Math.ceil(articles.length/articlesPerPage);
-    if (pageCount !== currentPage) {
+    const pageCount = Math.ceil(articles.length / articlesPerPage);
+
+    if (pageCount < currentPage) {
       const pages = pageCount - initialPage;
       setCurrentPage(pageCount - pages);
     }
-  }, [articles]);
+  }, [articles, articlesPerPage, currentPage]);
 
   const lastArticleIndex = currentPage * articlesPerPage;
   const firstArticleIndex = lastArticleIndex - articlesPerPage;

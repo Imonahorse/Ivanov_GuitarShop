@@ -16,27 +16,38 @@ function Pagination({articles, articlesPerPage, paginate, currentPage, nextPage,
       <div className={styles.wrapper}>
         {
           currentPage > 1 &&
-          <button className={cn(styles.button, styles.button__back)} type='button' onClick={prevPage}>Назад</button>
+          <button
+            className={cn(styles.button, styles.button__back)}
+            type='button'
+            onClick={prevPage}
+          >
+            Назад
+          </button>
         }
         <ul className={styles.list}>
           {
             pageNumbers.length > 1 &&
             pageNumbers.map((page) => (
               <li className={styles.item} key={page}>
-                <a
+                <button
                   className={cn(styles.link, {[styles.active]: page === currentPage})}
-                  href='/#'
                   onClick={() => paginate(page)}
                 >
                   {page}
-                </a>
+                </button>
               </li>
             ))
           }
         </ul>
         {
           currentPage < pageNumbers.length &&
-          <button className={styles.button} type='button' onClick={nextPage}>Далее</button>
+          <button
+            className={styles.button}
+            type='button'
+            onClick={nextPage}
+          >
+            Далее
+          </button>
         }
       </div>
     </section>
@@ -44,13 +55,12 @@ function Pagination({articles, articlesPerPage, paginate, currentPage, nextPage,
 }
 
 Pagination.propTypes = {
-  articles: PropTypes.node,
-  articlesPerPage: PropTypes.node,
-  paginate: PropTypes.node,
-  currentPage: PropTypes.node,
-  nextPage: PropTypes.node,
-  prevPage: PropTypes.node,
+  articles: PropTypes.number.isRequired,
+  articlesPerPage: PropTypes.number.isRequired,
+  paginate: PropTypes.func.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  nextPage: PropTypes.func.isRequired,
+  prevPage: PropTypes.func.isRequired,
 };
-
 
 export default Pagination;

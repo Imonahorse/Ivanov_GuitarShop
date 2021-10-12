@@ -1,12 +1,8 @@
-.small {
+.button {
   display: flex;
   justify-content: center;
-  width: 89px;
-  min-height: 23px;
-  padding: 4px 5px 4px 5px;
+  align-items: center;
 
-  font-size: 12px;
-  line-height: 15px;
   color: var(--white);
   border: none;
   border-radius: 2px;
@@ -16,14 +12,22 @@
   &__img {
     width: 87px;
     padding-left: 22px;
-    background: url('./cart.svg') 10px center no-repeat var(--orange);
+    background: url('./cart.svg') 10px center no-repeat;
   }
 }
 
 .gray {
   background-color: var(--gray-5);
+
+  &:hover {
+    background-color: var(--gray-3);
+  }
 }
 
 .orange {
   background-color: var(--orange);
+
+  &:hover {
+    opacity: 0.5;
+  }
 }

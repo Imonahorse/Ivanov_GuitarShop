@@ -8,6 +8,7 @@ import cn from 'classnames';
 import PropTypes from 'prop-types';
 import {selectBasket} from '../../../store/selectors';
 import {useSelector} from 'react-redux';
+import articleProps from './../article/article-props';
 
 function ArticlesList({articles}) {
   const {path} = useRouteMatch();
@@ -41,7 +42,7 @@ function ArticlesList({articles}) {
 }
 
 ArticlesList.propTypes = {
-  articles: PropTypes.node,
+  articles: PropTypes.arrayOf(articleProps),
 };
 
 export default ArticlesList;

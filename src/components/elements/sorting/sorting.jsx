@@ -29,7 +29,9 @@ function Sorting() {
         }
       </ul>
       <ul className={styles.additional_list}>
-        <li className={styles.addition_item} onClick={() => exchangeDirection('вверх')}>
+        <li className={styles.addition_item}
+          onClick={() => exchangeDirection('вверх')}
+        >
         </li>
         <li className={cn(styles.addition_item, styles.addition_item__reverse)}
           onClick={() => exchangeDirection('вниз')}

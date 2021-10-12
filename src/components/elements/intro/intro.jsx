@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './intro.module.scss';
 import {Link, useRouteMatch} from 'react-router-dom';
 import {AppRoutes} from '../../../const';
+import cn from 'classnames';
 
 const PaginationLinks = [
   {
@@ -13,13 +14,14 @@ const PaginationLinks = [
     link: AppRoutes.CATALOG,
   },
   {
-    label: 'Корзина',
+    label: 'Оформляем',
     link: AppRoutes.BASKET,
   },
 ];
 
 function Intro() {
   const {path} = useRouteMatch();
+
   const page = () => {
     switch (path) {
       case AppRoutes.CATALOG:
@@ -30,11 +32,13 @@ function Intro() {
         break;
     }
   };
+
   const pageIndex = PaginationLinks.findIndex((item) => item.link === path);
+
   const links = PaginationLinks.slice(0, pageIndex + 1);
 
   return (
-    <section className={styles.intro}>
+    <section className={cn(styles.intro, {[styles.intro__basket]: path === AppRoutes.BASKET})}>
       <h1 className={styles.title}>{page()}</h1>
       <ul className={styles.breadcrumbs}>
         {

@@ -3,11 +3,17 @@ import styles from './input.module.scss';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-function Input({label, value, ...attrs}) {
+function Input({className, label, value, ...attrs}) {
+  const inputStyles = cn(
+    styles.input,
+    {'visually-hidden': !className},
+    className,
+  );
+
   return (
     <label className={styles.label}>
       <input
-        className={cn(styles.input, 'visually-hidden')}
+        className={inputStyles}
         value={value}
         {...attrs}
       />
@@ -20,12 +26,13 @@ function Input({label, value, ...attrs}) {
 
 Input.propTypes = {
   value: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  // id: PropTypes.number.isRequired,
-  // name: PropTypes.string.isRequired,
-  // isChecked: PropTypes.bool.isRequired,
-  // disabled: PropTypes.bool.isRequired,
-  // onChange: PropTypes.func.isRequired,
+  label: PropTypes.string,
+  className: PropTypes.string,
+};
+
+Input.defaultProps = {
+  label: '',
+  className: '',
 };
 
 export default Input;
