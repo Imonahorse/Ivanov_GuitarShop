@@ -6,7 +6,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import BasketArticle from '../basket-article/basket-article';
 import {addToBasket} from '../../../store/actions';
 import cn from 'classnames';
-import {Link} from 'react-router-dom';
 import ReactModal from 'react-modal';
 import Button from '../button/button';
 import {AppRoutes} from '../../../const';
@@ -70,11 +69,11 @@ function Modal({setModalOpen, modalOpen}) {
           <>
             <h2 className={styles.title}>Товар успешно добавлен в корзину</h2>
             <div className={styles.controls}>
-              <Link to={AppRoutes.BASKET} className={cn(styles.button, styles.button__left)}>
+              <Button orange to={AppRoutes.BASKET} className={cn(styles.button, styles.button__left)}>
                 Перейти в корзину
-              </Link>
+              </Button>
               <Button
-                orange
+                white
                 className={styles.button}
                 onClick={handleCloseModalClick}
               >
@@ -87,7 +86,6 @@ function Modal({setModalOpen, modalOpen}) {
     </ReactModal>
   );
 }
-
 
 Modal.propTypes = {
   setModalOpen: PropTypes.func.isRequired,

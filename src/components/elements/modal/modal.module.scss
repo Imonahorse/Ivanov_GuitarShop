@@ -42,6 +42,10 @@
   background: url('../basket-article/close.svg');
   border: none;
   cursor: pointer;
+
+  &:hover {
+    opacity: 0.5;
+  }
 }
 
 .content {
@@ -116,25 +120,13 @@
 }
 
 .button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin-left: auto;
   width: 220px;
   min-height: 46px;
-  background: var(--orange);
-  border-radius: 2px;
   font-weight: bold;
   font-size: 16px;
   line-height: 15px;
   letter-spacing: 0.05em;
-  border: none;
-  color: var(--white);
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.5;
-  }
 
   &__left {
     margin-right: 37px;

@@ -3,15 +3,16 @@ import cn from 'classnames';
 import PropTypes from 'prop-types';
 import styles from './button.module.scss';
 
-function Button({img, orange, gray, className, disabled, onClick, children, ...attrs}){
-  const Tag = attrs.href ? 'a' : 'button';
+function Button({white, img, orange, gray, className, disabled, onClick, children, ...attrs}){
+  const Tag = attrs.to ? 'Link' : 'button';
 
   const buttonClass = cn(
     {[styles.orange]: orange},
     {[styles.gray]: gray},
     {[styles.button__img]: img},
-    styles.button,
+    {[styles.white]: white},
     className,
+    styles.button,
   );
 
   return(
@@ -27,6 +28,7 @@ function Button({img, orange, gray, className, disabled, onClick, children, ...a
 }
 
 Button.propTypes = {
+  white: PropTypes.bool,
   img: PropTypes.bool,
   children: PropTypes.string,
   gray: PropTypes.bool,
@@ -37,6 +39,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
+  white: false,
   img: false,
   children: 'button',
   gray: false,

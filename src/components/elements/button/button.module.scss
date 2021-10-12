@@ -9,10 +9,22 @@
   cursor: pointer;
   letter-spacing: 1px;
 
+  transition: 1s;
+
   &__img {
     width: 87px;
     padding-left: 22px;
     background: url('./cart.svg') 10px center no-repeat;
+  }
+}
+
+.white {
+  background-color: var(--white);
+  color: var(--black);
+  border: 1px solid var(--gray-4);
+
+  &:hover {
+    opacity: 0.5;
   }
 }
 
