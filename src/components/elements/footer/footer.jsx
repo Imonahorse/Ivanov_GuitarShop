@@ -4,6 +4,7 @@ import facebookIcon from './facebook.svg';
 import instagramIcon from './instagram.svg';
 import twitterIcon from './twitter.svg';
 import Logo from '../logo/logo';
+import {Link} from 'react-router-dom';
 
 const catalogLinks = [
   'Акустические гитары',
@@ -53,9 +54,9 @@ function Footer() {
             {
               socials.map(({description, img}) => (
                 <li className={styles.social_item} key={description}>
-                  <a className={styles.link} href='/'>
+                  <Link className={styles.link} to=''>
                     <img src={img} alt={description}/>
-                  </a>
+                  </Link>
                 </li>
               ))
             }
@@ -80,7 +81,7 @@ function Footer() {
               {
                 catalogLinks.map((link) => (
                   <li className={styles.catalog_item} key={link}>
-                    <a className={styles.link} href='/'>{link}</a>
+                    <Link className={styles.link} to='/'>{link}</Link>
                   </li>
                 ))
               }
@@ -92,7 +93,7 @@ function Footer() {
               {
                 infoLinks.map((link) => (
                   <li className={styles.info_item} key={link}>
-                    <a className={styles.link} href='/'>{link}</a>
+                    <Link className={styles.link} to=''>{link}</Link>
                   </li>
                 ))
               }

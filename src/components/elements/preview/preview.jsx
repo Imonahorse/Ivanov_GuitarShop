@@ -3,13 +3,13 @@ import Sorting from '../sorting/sorting';
 import ArticlesList from '../articles-list/articles-list';
 import Pagination from '../pagination/pagination';
 import {useSelector} from 'react-redux';
-import {selectFilteredArticles} from '../../../store/selectors';
+import {selectSortingArticles} from '../../../store/selectors';
 
 const initialPage = 1;
 const articlePerPage = 9;
 
 function Preview() {
-  const articles = useSelector(selectFilteredArticles);
+  const articles = useSelector(selectSortingArticles);
   const [currentPage, setCurrentPage] = useState(initialPage);
   const [articlesPerPage] = useState(articlePerPage);
 

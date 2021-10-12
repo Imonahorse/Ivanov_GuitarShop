@@ -356,7 +356,7 @@ const initialState = {
   articles: articles,
   activeArticle: '',
   sorting: '',
-  direction: '',
+  direction: 'вверх',
   price: {
     from: '',
     to: '',

@@ -59,7 +59,7 @@ export const selectDirection = (state) => state.direction;
 
 export const selectTotalPrice = (state) => getTotalPriceCount(state.price.total);
 
-export const selectFilteredByPriceArticles = createSelector(selectArticles, selectPrice, selectStringsCount, selectTypes,
+export const selectFilteredArticles = createSelector(selectArticles, selectPrice, selectStringsCount, selectTypes,
   (articles, price, strings, types) => (
     articles.filter((item) => {
       const filteredByPrice = filterByPrice(item, price);
@@ -69,7 +69,7 @@ export const selectFilteredByPriceArticles = createSelector(selectArticles, sele
     })
   ));
 
-export const selectFilteredArticles = createSelector(selectFilteredByPriceArticles, selectActiveSort, selectDirection, (articles, activeSort, activeDirection) => (
+export const selectSortingArticles = createSelector(selectFilteredArticles, selectActiveSort, selectDirection, (articles, activeSort, activeDirection) => (
   articles
     .slice()
     .sort(SortingTypes(activeSort, activeDirection))

@@ -15,6 +15,7 @@ const links = [
   'О компании',
   'Сервис-центры',
 ];
+
 const userMenuIcons = [
   {
     description: 'Map',
@@ -47,7 +48,7 @@ function Header() {
             {
               links.map((link) => (
                 <li className={styles.site_menu__item} key={link}>
-                  <a className={styles.link} href='/'>{link}</a>
+                  <Link className={styles.link} to=''>{link}</Link>
                 </li>
               ))
             }
