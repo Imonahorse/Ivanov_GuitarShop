@@ -96,11 +96,12 @@ function Filters() {
 
   const handlePriceBlue = (e) => {
     const {name} = e.target;
+
     if (+priceFrom > +priceTo && name === 'from' && priceTo) {
       setPriceFrom(priceTo);
     }
 
-    if (+priceTo < +priceFrom && name === 'to') {
+    if (+priceTo < +priceFrom && name === 'to' && priceFrom) {
       setPriceTo(priceFrom);
     }
   };
