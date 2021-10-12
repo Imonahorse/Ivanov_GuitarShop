@@ -115,14 +115,16 @@ function BasketArticle({info, popup, handleAddToBasketClick, handleCloseModalCli
 }
 
 BasketArticle.propTypes = {
-  handleCloseModalClick: PropTypes.func.isRequired,
-  handleAddToBasketClick: PropTypes.func.isRequired,
+  handleCloseModalClick: PropTypes.func,
+  handleAddToBasketClick: PropTypes.func,
   popup: PropTypes.bool,
   info: articleProps,
 };
 
 BasketArticle.defaultProps = {
   popup: false,
+  handleCloseModalClick: ()=>{},
+  handleAddToBasketClick: ()=>{},
 };
 
 export default BasketArticle;

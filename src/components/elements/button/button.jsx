@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import styles from './button.module.scss';
 
 function Button({img, orange, gray, className, disabled, onClick, children, ...attrs}){
-
   const Tag = attrs.href ? 'a' : 'button';
+
   const buttonClass = cn(
     {[styles.orange]: orange},
     {[styles.gray]: gray},
@@ -37,7 +37,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-  small: false,
+  img: false,
   children: 'button',
   gray: false,
   orange: false,

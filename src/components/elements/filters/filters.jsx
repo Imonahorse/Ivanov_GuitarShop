@@ -5,6 +5,17 @@ import {addPriceFrom, addPriceTo, addStringsCount, addTypes} from '../../../stor
 import Input from '../input/input';
 import Button from '../button/button';
 
+const priceInputs = [
+  {
+    name: 'from',
+    placeholder: '1 000',
+  },
+  {
+    name: 'to',
+    placeholder: '30 000',
+  },
+];
+
 const stringsState = [
   {id: 1, value: '4', label: '4', isChecked: false, disabled: false},
   {id: 2, value: '6', label: '6', isChecked: false, disabled: false},
@@ -153,28 +164,21 @@ function Filters() {
         <fieldset className={styles.fieldset}>
           <legend className={styles.legend}>Цена, ₽</legend>
           <ul className={styles.price_list}>
-            <li className={styles.price_item}>
-              <input
-                className={styles.price_input}
-                onChange={handlePriceChange}
-                name='from'
-                value={priceFrom}
-                type='text'
-                placeholder='1 000'
-                onBlur={handlePriceBlue}
-              />
-            </li>
-            <li className={styles.price_item}>
-              <input
-                onChange={handlePriceChange}
-                className={styles.price_input}
-                name='to'
-                value={priceTo}
-                type='text'
-                placeholder='30 000'
-                onBlur={handlePriceBlue}
-              />
-            </li>
+            {
+              priceInputs.map(({name, placeholder}) => (
+                <li key={name} className={styles.price_item}>
+                  <Input
+                    className={styles.price_input}
+                    onChange={handlePriceChange}
+                    name={name}
+                    value={name === 'from' ? priceFrom : priceTo}
+                    type='text'
+                    placeholder={placeholder}
+                    onBlur={handlePriceBlue}
+                  />
+                </li>
+              ))
+            }
           </ul>
         </fieldset>
         <fieldset className={styles.fieldset}>
