@@ -2,9 +2,10 @@ import React from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
 import styles from './button.module.scss';
+import {Link} from 'react-router-dom';
 
 function Button({white, img, orange, gray, className, disabled, onClick, children, ...attrs}){
-  const Tag = attrs.to ? 'Link' : 'button';
+  const Tag = attrs.to ? Link : 'button';
 
   const buttonClass = cn(
     {[styles.orange]: orange},
