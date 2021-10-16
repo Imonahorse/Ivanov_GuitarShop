@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import styles from './filters.module.scss';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {addPriceFrom, addPriceTo, addStringsCount, addTypes} from '../../../store/actions';
 import Input from '../input/input';
-import Button from '../button/button';
+import {selectArticles} from '../../../store/selectors';
 
 const priceInputs = [
   {
@@ -57,6 +57,28 @@ function Filters() {
   const [strings, setStrings] = useState(stringsState);
   const [types, setTypes] = useState(typesState);
 
+  const dispatch = useDispatch();
+  const articles = useSelector(selectArticles);
+
+  const maxPrice = articles.reduce((acc, current) => {
+    if (current.price > acc) {
+      acc = current.price;
+    }
+
+    return acc;
+  }, 0);
+  const minPrice = articles.reduce((acc, current, index) => {
+    if (index === 1) {
+      acc = current.price;
+    }
+
+    if (index > 1 && current.price < acc) {
+      acc = current.price;
+    }
+
+    return acc;
+  }, 0);
+
   useEffect(() => {
     const activeTypes = types.filter((item) => item.isChecked);
 
@@ -83,7 +105,31 @@ function Filters() {
 
   }, [types]);
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(addPriceFrom(priceFrom));
+
+    dispatch(addPriceTo(priceTo));
+
+    const stringArray = [];
+
+    strings.forEach((item) => {
+      if (item.isChecked) {
+        stringArray.push(item.value);
+      }
+    });
+
+    const typesArray = [];
+
+    types.forEach((item) => {
+      if (item.isChecked) {
+        typesArray.push(item.value);
+      }
+    });
+
+    dispatch(addStringsCount(stringArray));
+
+    dispatch(addTypes(typesArray));
+  }, [dispatch, priceFrom, priceTo, strings, types]);
 
   const handlePriceChange = (e) => {
     const {name, value} = e.target;
@@ -107,8 +153,16 @@ function Filters() {
       setPriceFrom(priceTo);
     }
 
+    if (priceFrom < minPrice && priceFrom) {
+      setPriceFrom(minPrice);
+    }
+
     if (+priceTo < +priceFrom && name === 'to' && priceFrom) {
       setPriceTo(priceFrom);
+    }
+
+    if (priceTo > maxPrice && priceTo) {
+      setPriceTo(maxPrice);
     }
   };
 
@@ -137,38 +191,10 @@ function Filters() {
     setTypes(arr);
   };
 
-  const submit = (e) => {
-    e.preventDefault();
-
-    dispatch(addPriceFrom(priceFrom));
-
-    dispatch(addPriceTo(priceTo));
-
-    const stringArray = [];
-
-    strings.forEach((item) => {
-      if (item.isChecked) {
-        stringArray.push(item.value);
-      }
-    });
-
-    const typesArray = [];
-
-    types.forEach((item) => {
-      if (item.isChecked) {
-        typesArray.push(item.value);
-      }
-    });
-
-    dispatch(addStringsCount(stringArray));
-
-    dispatch(addTypes(typesArray));
-  };
-
   return (
     <section className={styles.filter}>
       <h2 className={styles.title}>Фильтр</h2>
-      <form action='' method='post' onSubmit={submit}>
+      <form action='' method='post'>
         <fieldset className={styles.fieldset}>
           <legend className={styles.legend}>Цена, ₽</legend>
           <ul className={styles.price_list}>
@@ -181,7 +207,7 @@ function Filters() {
                     name={name}
                     value={name === 'from' ? priceFrom : priceTo}
                     type='text'
-                    placeholder={placeholder}
+                    placeholder={name === 'from' ? minPrice : maxPrice}
                     onBlur={handlePriceBlue}
                   />
                 </li>
@@ -229,7 +255,6 @@ function Filters() {
             }
           </ul>
         </fieldset>
-        <Button gray className={styles.submit} type='submit'>Показать</Button>
       </form>
     </section>
   );

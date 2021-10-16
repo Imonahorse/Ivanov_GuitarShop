@@ -11,9 +11,9 @@ const filterByPrice = (item, price) => {
     return item.price <= to;
   }
   if (!to) {
-    return item.price > from;
+    return item.price >= from;
   }
-  return item.price > from && item.price <= to;
+  return item.price >= from && item.price <= to;
 };
 
 const filterByStrings = (item, strings) => {
