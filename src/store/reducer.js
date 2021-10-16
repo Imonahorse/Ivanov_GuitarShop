@@ -12,7 +12,7 @@ import {
   changeDirection,
   changeSort,
   deleteFromBasket,
-  addTotalPrice, changeGuitarCount, addToBasketCount
+  addTotalPrice, changeGuitarCount, addToBasketCount, deleteFromTotal
 } from './actions';
 
 function randomInteger(min, max) {
@@ -387,6 +387,9 @@ const initialState = {
 
 const reducer = createReducer(initialState, (builder) => {
   builder
+    .addCase(deleteFromTotal, (state, action) => {
+      state.price.total = deleteId(action.payload, state.price.total);
+    })
     .addCase(addToBasket, (state, action) => {
       state.basket = addNewId(action.payload, state.basket);
     })

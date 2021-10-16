@@ -4,7 +4,7 @@ import cn from 'classnames';
 import PropTypes from 'prop-types';
 import {AppRoutes, makePriceString} from '../../../const';
 import {useDispatch, useSelector} from 'react-redux';
-import {changeGuitarCount, deleteFromBasket} from '../../../store/actions';
+import {addActiveArticle, changeGuitarCount, deleteFromBasket, deleteFromTotal} from '../../../store/actions';
 import articleProps from './../article/article-props';
 import Button from '../button/button';
 import Input from '../input/input';
@@ -25,12 +25,13 @@ const PopupImage = {
 const MAX_COUNT = 10;
 const MIN_COUNT = 1;
 
-function BasketArticle({info, popup, handleAddToBasketClick, handleCloseModalClick, handleDeleteFromBasketClick}) {
+function BasketArticle({info, popup, handleAddToBasketClick, handleCloseModalClick}) {
   const totalPrice = useSelector(selectTotal);
   const {path} = useRouteMatch();
   const {id, name, price, img, type, strings, article} = info;
   const activeId = totalPrice.find((item) => item.id === id);
   const [guitarCount, setGuitarCount] = useState(activeId ? activeId.count : MIN_COUNT);
+  const [prevGuitarCount, setPrevGuitarCount] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
   const dispatch = useDispatch();
   const isBasket = !popup;
@@ -42,6 +43,10 @@ function BasketArticle({info, popup, handleAddToBasketClick, handleCloseModalCli
 
   const handleGuitarCountMinus = () => {
     setGuitarCount((prev) => prev === MIN_COUNT ? MIN_COUNT : +prev - MIN_COUNT);
+    dispatch(addActiveArticle(id));
+    if (guitarCount === 1) {
+      setModalOpen(true);
+    }
   };
 
   const handleGuitarCountPlus = () => {
@@ -60,13 +65,30 @@ function BasketArticle({info, popup, handleAddToBasketClick, handleCloseModalCli
       setGuitarCount(inputValue);
     }
 
-    if (inputValue < 0) {
-      setGuitarCount(0);
+    if (inputValue < 1) {
+      setGuitarCount(1);
     }
 
     if (inputValue > 10) {
       setGuitarCount(10);
     }
+  };
+
+  const handleInputClick = () => {
+    setPrevGuitarCount(guitarCount);
+    setGuitarCount('');
+  };
+
+  const handleInputBlur = () => {
+    if (!guitarCount) {
+      setGuitarCount(prevGuitarCount);
+      setPrevGuitarCount('');
+    }
+  };
+
+  const deleteArticleFromBasket = () => {
+    dispatch(deleteFromBasket(info));
+    dispatch(deleteFromTotal(info));
   };
 
   const priceElement = (
@@ -88,6 +110,8 @@ function BasketArticle({info, popup, handleAddToBasketClick, handleCloseModalCli
           value={guitarCount}
           onChange={handleInputChange}
           type='text'
+          onClick={handleInputClick}
+          onBlur={handleInputBlur}
         >
         </Input>
         <button
@@ -105,7 +129,7 @@ function BasketArticle({info, popup, handleAddToBasketClick, handleCloseModalCli
       <Button
         orange
         className={styles.buy}
-        onClick={path === AppRoutes.BASKET ? handleDeleteFromBasketClick : handleAddToBasketClick}
+        onClick={path === AppRoutes.BASKET ? deleteArticleFromBasket : handleAddToBasketClick}
       >
         {path === AppRoutes.BASKET ? 'Удалить товар?' : 'Добавить в корзину'}
       </Button>
@@ -113,6 +137,7 @@ function BasketArticle({info, popup, handleAddToBasketClick, handleCloseModalCli
         popup && path === AppRoutes.BASKET &&
         <Button
           white
+          to={AppRoutes.CATALOG}
           className={styles.buy}
           onClick={handleCloseModalClick}
         >
@@ -121,10 +146,6 @@ function BasketArticle({info, popup, handleAddToBasketClick, handleCloseModalCli
       }
     </div>
   );
-
-  const deleteArticleFromBasket = () => {
-    dispatch(deleteFromBasket(info));
-  };
 
   return (
     <article className={cn({[styles.article]: isBasket}, {[styles.wrapper]: popup})} id={id}>
@@ -167,7 +188,6 @@ function BasketArticle({info, popup, handleAddToBasketClick, handleCloseModalCli
 BasketArticle.propTypes = {
   handleCloseModalClick: PropTypes.func,
   handleAddToBasketClick: PropTypes.func,
-  handleDeleteFromBasketClick: PropTypes.func,
   popup: PropTypes.bool,
   info: articleProps,
 };
@@ -177,8 +197,6 @@ BasketArticle.defaultProps = {
   handleCloseModalClick: () => {
   },
   handleAddToBasketClick: () => {
-  },
-  handleDeleteFromBasketClick: () => {
   },
 };
 

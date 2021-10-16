@@ -69,9 +69,15 @@ function Filters() {
 
     setStrings((prev) => prev.map((item) => {
       item.disabled = !activeStringsState.has(item.value);
+
       if (!activeStringsState.size) {
         item.disabled = false;
       }
+
+      if (item.disabled) {
+        item.isChecked = false;
+      }
+
       return item;
     }));
 
@@ -108,6 +114,7 @@ function Filters() {
 
   const handleStringsChange = (e) => {
     const {checked, value} = e.target;
+
     const arr = strings.slice();
     arr.forEach((item) => {
       if (item.value === value) {

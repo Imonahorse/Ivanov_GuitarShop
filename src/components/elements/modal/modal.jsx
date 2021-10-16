@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import styles from './modal.module.scss';
 import PropTypes from 'prop-types';
 import {selectActiveArticle} from '../../../store/selectors';
@@ -15,6 +15,7 @@ ReactModal.setAppElement('#root');
 
 function Modal({setModalOpen, modalOpen}) {
   const article = useSelector(selectActiveArticle);
+  const buttonRef = useRef('');
   const dispatch = useDispatch();
   const {path} = useRouteMatch();
   const [firstPopupState, setFirstPopupState] = useState(true);
@@ -33,6 +34,7 @@ function Modal({setModalOpen, modalOpen}) {
 
   const handleAfterOpen = () => {
     document.body.classList.add(styles.open);
+    buttonRef.current.focus();
   };
 
   const handleAfterClose = () => {
@@ -54,6 +56,7 @@ function Modal({setModalOpen, modalOpen}) {
           className={styles.close}
           onClick={handleCloseModalClick}
           type='button'
+          ref={buttonRef}
         />
         {
           firstPopupState &&
