@@ -12,6 +12,7 @@ const ActionsTypes = {
   DELETE_FROM_BASKET: 'deleteFromBasket',
   ADD_TOTAL_PRICE: 'addTotalPrice',
   CHANGE_GUITAR_COUNT: 'changeGuitarCount',
+  ADD_TO_BASKET_COUNT: 'addToBasketCount',
 };
 
 const addTotalPrice = createAction(ActionsTypes.ADD_TOTAL_PRICE, (price) => ({
@@ -58,6 +59,10 @@ const addActiveArticle = createAction(ActionsTypes.ADD_ACTIVE_ARTICLE, (types) =
   payload: types,
 }));
 
+const addToBasketCount = createAction(ActionsTypes.ADD_TO_BASKET_COUNT, (count) => ({
+  payload: count,
+}));
+
 export {
   addToBasket,
   changeSort,
@@ -69,5 +74,6 @@ export {
   changeDirection,
   deleteFromBasket,
   addTotalPrice,
-  changeGuitarCount
+  changeGuitarCount,
+  addToBasketCount
 };

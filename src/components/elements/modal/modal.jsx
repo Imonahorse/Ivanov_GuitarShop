@@ -4,17 +4,19 @@ import PropTypes from 'prop-types';
 import {selectActiveArticle} from '../../../store/selectors';
 import {useDispatch, useSelector} from 'react-redux';
 import BasketArticle from '../basket-article/basket-article';
-import {addToBasket} from '../../../store/actions';
+import {addToBasket, addToBasketCount} from '../../../store/actions';
 import cn from 'classnames';
 import ReactModal from 'react-modal';
 import Button from '../button/button';
 import {AppRoutes} from '../../../const';
+import {useRouteMatch} from 'react-router-dom';
 
 ReactModal.setAppElement('#root');
 
 function Modal({setModalOpen, modalOpen}) {
   const article = useSelector(selectActiveArticle);
   const dispatch = useDispatch();
+  const {path} = useRouteMatch();
   const [firstPopupState, setFirstPopupState] = useState(true);
   const [secondPopupState, setSecondPopupState] = useState(false);
 
@@ -26,6 +28,7 @@ function Modal({setModalOpen, modalOpen}) {
     setFirstPopupState(false);
     setSecondPopupState(true);
     dispatch(addToBasket(article));
+    dispatch(addToBasketCount(article));
   };
 
   const handleAfterOpen = () => {
@@ -55,7 +58,9 @@ function Modal({setModalOpen, modalOpen}) {
         {
           firstPopupState &&
           <>
-            <h2 className={styles.title}>Добавить товар в корзину</h2>
+            <h2 className={styles.title}>
+              {path === AppRoutes.BASKET ? 'Удалить этот товар' : 'Добавить товар в корзину'}
+            </h2>
             <BasketArticle
               popup
               info={article}

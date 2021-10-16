@@ -12,7 +12,7 @@ import {
   changeDirection,
   changeSort,
   deleteFromBasket,
-  addTotalPrice, changeGuitarCount
+  addTotalPrice, changeGuitarCount, addToBasketCount
 } from './actions';
 
 function randomInteger(min, max) {
@@ -24,6 +24,7 @@ const findId = (array, id) => array.find((card) => card.id === id);
 
 const addNewId = (card, array) => {
   const index = array.findIndex((item) => item.id === card.id);
+
   if (index === -1) {
     array.push(card);
     return array;
@@ -32,15 +33,32 @@ const addNewId = (card, array) => {
   return array;
 };
 
+const addNewCount = (card, array) => {
+  const index = array.findIndex((item) => item.id === card.id);
+
+  if (index === -1) {
+    array.push({id: card.id, price: card.price, count: 1});
+    return array;
+  }
+
+  return array.filter((item) => {
+    if (item.id === card.id) {
+      item.count = item.count + 1;
+    }
+
+    return item;
+  });
+};
+
 const changeCount = (card, array) => {
   const index = array.findIndex((item) => item.id === card.id);
+
   if (index === -1) {
     return array;
   }
 
   return [...array.slice(0, index), card, ...array.slice(index + 1)];
 };
-
 
 const deleteId = (card, array) => {
   const index = array.findIndex((item) => item.id === card.id);
@@ -371,7 +389,9 @@ const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(addToBasket, (state, action) => {
       state.basket = addNewId(action.payload, state.basket);
-      state.price.total = state.basket.map((item) => ({id: item.id, price: item.price, count: 1}));
+    })
+    .addCase(addToBasketCount, (state, action) => {
+      state.price.total = addNewCount(action.payload, state.price.total);
     })
     .addCase(changeGuitarCount, (state, action) => {
       state.price.total = changeCount(action.payload, state.price.total);

@@ -32,7 +32,7 @@ function Order() {
       return;
     }
 
-    setPromocode(value);
+    setPromocode(value.trim());
   };
 
   const handleFormSubmit = (e) => {

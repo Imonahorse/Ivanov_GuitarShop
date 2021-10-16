@@ -57,6 +57,8 @@ export const selectBasket = (state) => state.basket;
 
 export const selectDirection = (state) => state.direction;
 
+export const selectTotal = (state) => state.price.total;
+
 export const selectTotalPrice = (state) => getTotalPriceCount(state.price.total);
 
 export const selectFilteredArticles = createSelector(selectArticles, selectPrice, selectStringsCount, selectTypes,
