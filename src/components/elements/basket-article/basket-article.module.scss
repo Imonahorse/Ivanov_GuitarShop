@@ -113,16 +113,16 @@
 
 .count {
   width: 28px;
-  border-top: none;
-  border-bottom: none;
-  height: 28px;
-  text-align: center;
+  height: 100%;
   margin: 0;
 
   font-size: 19px;
   line-height: 15px;
   letter-spacing: 0.05em;
   color: var(--black);
+  text-align: center;
+  border-bottom: none;
+  border-top: none;
   border-left: 1px solid var(--gray-4);
   border-right: 1px solid var(--gray-4);
 }
