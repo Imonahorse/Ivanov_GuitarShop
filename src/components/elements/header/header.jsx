@@ -36,8 +36,6 @@ const userMenuIcons = [
 
 function Header() {
   const basketCount = useSelector(selectBasket);
-  //eslint-disable-next-line no-console
-  console.log(basketCount);
 
   return (
     <header className={styles.header}>

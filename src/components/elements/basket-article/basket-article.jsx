@@ -39,7 +39,7 @@ function BasketArticle({info, popup, handleAddToBasketClick, handleCloseModalCli
 
   useEffect(() => {
     dispatch(changeGuitarCount({id: id, price: price, count: guitarCount}));
-  }, [guitarCount]);
+  }, [guitarCount, dispatch, id, price]);
 
   const handleGuitarCountMinus = () => {
     setGuitarCount((prev) => prev === MIN_COUNT ? MIN_COUNT : +prev - MIN_COUNT);
